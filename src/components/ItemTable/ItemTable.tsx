@@ -17,13 +17,11 @@ const ItemTable = (props) => {
   ]);
 
   const itemHandler = (item: { id: string, icon: IconType, name: string, price: number}) => {
-    console.log(item);
     onOpen();
-    console.log('the dialog is open?', isOpen);
   } 
   
   return (
-    <TableContainer width='100%' overflowY='auto'>
+    <TableContainer width='100%' overflowY='auto' border='1px solid #3182ce' borderRadius={5}>
       <Table variant='simple' size='sm'>
         <TableCaption placement="top">{props.description}</TableCaption>
         <Thead>
@@ -31,6 +29,7 @@ const ItemTable = (props) => {
             <Th></Th>
             <Th>商品</Th>
             <Th>价格</Th>
+            { props.enableStock && <Th>仓库</Th> }
           </Tr>
         </Thead>
         <Tbody>
@@ -39,6 +38,7 @@ const ItemTable = (props) => {
               <Td><Icon as={item.icon}></Icon></Td>
               <Td>{item.name}</Td>
               <Td>{item.price}</Td>
+              { props.enableStock && <Td></Td>}
             </Tr>
           )}
         </Tbody>

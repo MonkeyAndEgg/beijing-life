@@ -1,7 +1,7 @@
-import { UserItem } from '../../src/models/userItem';
+import { Item } from '../../src/models/item';
 import * as t from '../types';
 
-export const setUserItems = (items: UserItem[]) => ({
+export const setUserItems = (items: Item[]) => ({
   type: t.SET_USER_ITEMS,
   payload: items
 });

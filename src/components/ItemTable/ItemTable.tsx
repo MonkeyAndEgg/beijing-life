@@ -5,6 +5,7 @@ import { MdCheckCircle } from 'react-icons/md'
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { useTransaction } from "../../context/useTransaction";
+import { Item } from "../../models/item";
 
 const ItemTable = (props) => {
   const { isOpen, onOpen } = useTransaction();
@@ -42,12 +43,12 @@ const ItemTable = (props) => {
           </Tr>
         </Thead>
         <Tbody>
-          {items && items.map((item: { id: string, icon: IconType, name: string, price: number}) => 
+          {items && items.map((item: Item) => 
             <Tr key={item.id} onClick={() => itemHandler(item)}>
               <Td><Icon as={item.icon}></Icon></Td>
               <Td>{item.name}</Td>
               <Td>{item.price}</Td>
-              { props.isUser && <Td>{user.cash}</Td>}
+              { props.isUser && <Td>{item.quantity}</Td>}
             </Tr>
           )}
         </Tbody>

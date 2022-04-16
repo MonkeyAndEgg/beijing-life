@@ -19,7 +19,7 @@ const HomePage = () => {
           <Transaction></Transaction>
 
           <VStack w='full' h='35vh' p={0} spacing={10} alignItems='flex-start'>
-            <ItemTable enableStock={true} description='您的出租屋'></ItemTable>
+            <ItemTable isUser={true} description='您的出租屋'></ItemTable>
           </VStack>
         </Flex>
         <Flex h="50vh" py={0}>

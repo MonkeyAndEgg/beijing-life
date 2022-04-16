@@ -1,7 +1,9 @@
 import { Icon, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconType } from "react-icons";
 import { MdCheckCircle } from 'react-icons/md'
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/reducers/rootReducer";
 import { useTransaction } from "../../context/useTransaction";
 
 const ItemTable = (props) => {
@@ -18,10 +20,17 @@ const ItemTable = (props) => {
 
   const itemHandler = (item: { id: string, icon: IconType, name: string, price: number}) => {
     onOpen();
-  } 
+  };
+  const user = useSelector((state: RootState) => state.user);
   
+  useEffect(() => {
+    if (props.isUser) {
+      setItems(user.items);
+    }
+  }, [props.isUser, user.items, setItems])
+
   return (
-    <TableContainer width='100%' overflowY='auto' border='1px solid #3182ce' borderRadius={5}>
+    <TableContainer w='100%' h='32vh' overflowY='auto' border='1px solid #3182ce' borderRadius={5}>
       <Table variant='simple' size='sm'>
         <TableCaption placement="top">{props.description}</TableCaption>
         <Thead>
@@ -29,7 +38,7 @@ const ItemTable = (props) => {
             <Th></Th>
             <Th>商品</Th>
             <Th>价格</Th>
-            { props.enableStock && <Th>仓库</Th> }
+            { props.isUser && <Th>仓库</Th> }
           </Tr>
         </Thead>
         <Tbody>
@@ -38,7 +47,7 @@ const ItemTable = (props) => {
               <Td><Icon as={item.icon}></Icon></Td>
               <Td>{item.name}</Td>
               <Td>{item.price}</Td>
-              { props.enableStock && <Td></Td>}
+              { props.isUser && <Td>{user.cash}</Td>}
             </Tr>
           )}
         </Tbody>

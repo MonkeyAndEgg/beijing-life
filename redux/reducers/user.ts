@@ -7,6 +7,7 @@ export interface UserState {
   deposit: number;
   debt: number;
   items: Item[];
+  daysLeft: number;
 }
 
 const initalState: UserState = {
@@ -14,7 +15,8 @@ const initalState: UserState = {
   cash: 2000,
   deposit: 0,
   debt: 0,
-  items: []
+  items: [],
+  daysLeft: 40
 };
 
 const user = (state = initalState, action) => {
@@ -23,6 +25,31 @@ const user = (state = initalState, action) => {
       return {
         ...state,
         items: action.payload
+      };
+    case t.SET_USER_HEALTH:
+      return {
+        ...state,
+        health: action.payload
+      };
+    case t.SET_USER_CASH:
+      return {
+        ...state,
+        cash: action.payload
+      };
+    case t.SET_USER_DEBT:
+      return {
+        ...state,
+        debt: action.payload
+      };
+    case t.SET_USER_DAYS_LEFT:
+      return {
+        ...state,
+        daysLeft: action.payload
+      };
+    case t.SET_USER_DEPOSIT:
+      return {
+        ...state,
+        deposit: action.payload
       };
     default:
       return { ...state };

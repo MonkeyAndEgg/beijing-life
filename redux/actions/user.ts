@@ -25,3 +25,8 @@ export const setUserDebt = (debt: number) => ({
   type: t.SET_USER_DEBT,
   payload: debt
 });
+
+export const setUserDaysLeft = (daysLeft: number) => ({
+  type: t.SET_USER_DAYS_LEFT,
+  payload: daysLeft
+});

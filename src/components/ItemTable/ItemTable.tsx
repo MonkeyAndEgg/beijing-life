@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { useTransaction } from "../../context/useTransaction";
 import { Item } from "../../models/item";
+import Card from "../Card/Card";
 
 const ItemTable = (props) => {
   const { onOpen } = useTransaction();
@@ -30,29 +31,31 @@ const ItemTable = (props) => {
   }, [props.isUser, user.items, setItems])
 
   return (
-    <TableContainer w='100%' h='32vh' overflowY='auto' border='1px solid #3182ce' borderRadius={5}>
-      <Table variant='simple' size='sm'>
-        <TableCaption placement="top">{props.description}</TableCaption>
-        <Thead>
-          <Tr>
-            <Th></Th>
-            <Th>商品</Th>
-            <Th>价格</Th>
-            { props.isUser && <Th>仓库</Th> }
-          </Tr>
-        </Thead>
-        <Tbody>
-          {items && items.map((item: Item) => 
-            <Tr key={item.id} onClick={() => itemHandler(item)}>
-              <Td><Icon as={item.icon}></Icon></Td>
-              <Td>{item.name}</Td>
-              <Td>{item.price}</Td>
-              { props.isUser && <Td>{item.quantity}</Td>}
+    <Card>
+      <TableContainer w='100%' h='32vh' overflowY='auto'>
+        <Table variant='simple' size='sm'>
+          <TableCaption placement="top">{props.description}</TableCaption>
+          <Thead>
+            <Tr>
+              <Th></Th>
+              <Th>商品</Th>
+              <Th>价格</Th>
+              { props.isUser && <Th>仓库</Th> }
             </Tr>
-          )}
-        </Tbody>
-      </Table>
-    </TableContainer>
+          </Thead>
+          <Tbody>
+            {items && items.map((item: Item) => 
+              <Tr key={item.id} onClick={() => itemHandler(item)}>
+                <Td><Icon as={item.icon}></Icon></Td>
+                <Td>{item.name}</Td>
+                <Td>{item.price}</Td>
+                { props.isUser && <Td>{item.quantity}</Td>}
+              </Tr>
+            )}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    </Card>
   );
 }
 

@@ -6,7 +6,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserItems } from "../../../redux/actions/user";
+import { setUserCash, setUserItems } from "../../../redux/actions/user";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";
 import { useTransaction } from "../../context/useTransaction";
@@ -27,7 +27,7 @@ const TransactionModal = () => {
   }, [isOpen, user, selectedItem])
 
   const transactionHanlder = () => {
-    if (selectedItem.quantity > 0) {
+    if (quantity > 0) {
       const updateList = user.items;
       const index = updateList.findIndex(item => item.name === selectedItem.name);
       if (index > -1) {
@@ -40,7 +40,9 @@ const TransactionModal = () => {
           quantity
         } as Item);
       }
+      const remainingCash = user.cash - selectedItem.price * quantity;
       dispatch(setUserItems(updateList));
+      dispatch(setUserCash(remainingCash));
     }
 
     closeDialog();

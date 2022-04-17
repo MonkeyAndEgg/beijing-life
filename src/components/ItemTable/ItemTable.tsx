@@ -1,6 +1,5 @@
 import { Icon, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { IconType } from "react-icons";
 import { MdCheckCircle } from 'react-icons/md'
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/reducers/rootReducer";
@@ -8,7 +7,7 @@ import { useTransaction } from "../../context/useTransaction";
 import { Item } from "../../models/item";
 
 const ItemTable = (props) => {
-  const { isOpen, onOpen } = useTransaction();
+  const { onOpen } = useTransaction();
   const [items, setItems] = useState([
     { id:'1', icon: MdCheckCircle, name: '进口香烟', price: 12 },
     { id:'2', icon: MdCheckCircle, name: '上海小宝贝18禁', price: 135 },
@@ -19,8 +18,8 @@ const ItemTable = (props) => {
     { id:'7', icon: MdCheckCircle, name: '假白酒', price: 220 }
   ]);
 
-  const itemHandler = (item: { id: string, icon: IconType, name: string, price: number}) => {
-    onOpen();
+  const itemHandler = (item: Item) => {
+    onOpen(item);
   };
   const user = useSelector((state: RootState) => state.user);
   

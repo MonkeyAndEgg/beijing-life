@@ -1,9 +1,11 @@
 import { useDisclosure } from "@chakra-ui/react";
-import { createContext, PropsWithChildren, useCallback, useContext, useMemo } from "react";
+import { createContext, PropsWithChildren, useCallback, useContext, useMemo, useState } from "react";
+import { Item } from "../models/item";
 
 export interface TransactionContextValue {
   isOpen: boolean;
-  onOpen: () => void;
+  item: Item; // transaction item
+  onOpen: (item: Item) => void;
   onClose: () => void
 }
 
@@ -15,10 +17,12 @@ export function useTransaction() {
 
 export function TransactionProvider({ children }: PropsWithChildren<{}>) {
   const { isOpen, onOpen: _onOpen, onClose: _onClose } = useDisclosure();
+  const [ item, setItem ] = useState({} as Item);
 
-  const onOpen = useCallback(() => {
+  const onOpen = useCallback((item) => {
     _onOpen();
-  }, [_onOpen]);
+    setItem(item);
+  }, [_onOpen, setItem]);
 
   const onClose = useCallback(() => {
     _onClose();
@@ -27,10 +31,11 @@ export function TransactionProvider({ children }: PropsWithChildren<{}>) {
   const value = useMemo<TransactionContextValue>(
     () => ({
       isOpen,
+      item,
       onOpen,
       onClose
     }),
-    [isOpen, onOpen, onClose]
+    [isOpen, item, onOpen, onClose]
   );
 
   return <TransactionContext.Provider value={value}>{children}</TransactionContext.Provider>;

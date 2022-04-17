@@ -1,12 +1,12 @@
-import { UserItem } from '../../src/models/userItem';
+import { Item } from '../../src/models/item';
 import * as t from '../types';
 
-interface UserState {
+export interface UserState {
   health: number;
   cash: number;
   deposit: number;
   debt: number;
-  items: UserItem[];
+  items: Item[];
 }
 
 const initalState: UserState = {

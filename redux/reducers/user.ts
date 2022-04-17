@@ -8,6 +8,7 @@ export interface UserState {
   debt: number;
   items: Item[];
   daysLeft: number;
+  reputation: number;
 }
 
 const initalState: UserState = {
@@ -16,7 +17,8 @@ const initalState: UserState = {
   deposit: 0,
   debt: 0,
   items: [],
-  daysLeft: 40
+  daysLeft: 40,
+  reputation: 100
 };
 
 const user = (state = initalState, action) => {
@@ -50,6 +52,11 @@ const user = (state = initalState, action) => {
       return {
         ...state,
         deposit: action.payload
+      };
+    case t.SET_USER_REPUTATION:
+      return {
+        ...state,
+        reputation: action.payload
       };
     default:
       return { ...state };

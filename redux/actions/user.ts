@@ -30,3 +30,8 @@ export const setUserDaysLeft = (daysLeft: number) => ({
   type: t.SET_USER_DAYS_LEFT,
   payload: daysLeft
 });
+
+export const SetUserReputation = (reputation: number) => ({
+  type: t.SET_USER_REPUTATION,
+  payload: reputation
+});

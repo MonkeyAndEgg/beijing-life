@@ -13,7 +13,7 @@ import { useTransaction } from "../../context/useTransaction";
 import { Item } from "../../models/item";
 
 const TransactionModal = () => {
-  const { isOpen, item: selectedItem, onClose } = useTransaction();
+  const { isOpen, isBuy, item: selectedItem, onClose } = useTransaction();
   const [ quantity, setQuantity ] = useState(0);
   const [ maxQuantity, setMaxQuantity ] = useState(0);
   const user: UserState= useSelector((state: RootState) => state.user);
@@ -21,26 +21,40 @@ const TransactionModal = () => {
 
   useEffect(() => {
     if (isOpen) {
-      const roundedMax = Math.floor(user.cash / selectedItem.price);
-      setMaxQuantity(roundedMax);
+      const maxNum = isBuy ?
+        Math.floor(user.cash / selectedItem.price) : user.items.find(item => item.name === selectedItem.name).quantity;
+      setMaxQuantity(maxNum);
     }
-  }, [isOpen, user, selectedItem])
+  }, [isOpen, isBuy, user, selectedItem])
 
   const transactionHanlder = () => {
     if (quantity > 0) {
       const updateList = user.items;
       const index = updateList.findIndex(item => item.name === selectedItem.name);
-      if (index > -1) {
-        const updateItem = updateList[index];
-        updateItem.quantity += quantity;
-        updateList[index] = updateItem;
+      let remainingCash: number;
+      if (isBuy) {
+        if (index > -1) {
+          const updateItem = updateList[index];
+          updateItem.quantity += quantity;
+          updateList[index] = updateItem;
+        } else {
+          updateList.push({
+            ...selectedItem,
+            quantity
+          } as Item);
+        }
+        remainingCash = user.cash - selectedItem.price * quantity;
       } else {
-        updateList.push({
-          ...selectedItem,
-          quantity
-        } as Item);
+        if (quantity === updateList[index].quantity) {
+          updateList.splice(index, 1);
+        } else {
+          const updateItem = updateList[index];
+          updateItem.quantity -= quantity;
+          updateList[index] = updateItem;
+        }
+        remainingCash = user.cash + selectedItem.price * quantity;
       }
-      const remainingCash = user.cash - selectedItem.price * quantity;
+
       dispatch(setUserItems(updateList));
       dispatch(setUserCash(remainingCash));
     }
@@ -63,9 +77,9 @@ const TransactionModal = () => {
         
         <ModalBody>
           <HStack justify='center' my={5}>
-            <Image w={20} src='/images/stop.jpg' alt="早安,打工人"></Image>
+            <Image w={20} src='/images/stop.jpg' alt="我已经没钱了"></Image>
           </HStack>
-          你想买多少呢?
+          {isBuy ? '你想买多少呢?' : '你想卖多少呢?'}
           <NumberInput value={quantity} min={0} max={maxQuantity} my={5} onChange={(value) => setQuantity(+value)} allowMouseWheel>
             <NumberInputField />
             <NumberInputStepper>

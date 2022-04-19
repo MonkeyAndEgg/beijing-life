@@ -4,8 +4,9 @@ import { Item } from "../models/item";
 
 export interface TransactionContextValue {
   isOpen: boolean;
+  isBuy: boolean;
   item: Item; // transaction item
-  onOpen: (item: Item) => void;
+  onOpen: (item: Item, isUser: boolean) => void;
   onClose: () => void
 }
 
@@ -18,11 +19,13 @@ export function useTransaction() {
 export function TransactionProvider({ children }: PropsWithChildren<{}>) {
   const { isOpen, onOpen: _onOpen, onClose: _onClose } = useDisclosure();
   const [ item, setItem ] = useState({} as Item);
+  const [ isBuy, setIsBuy ] = useState(true);
 
-  const onOpen = useCallback((item) => {
+  const onOpen = useCallback((item: Item, isUser: boolean) => {
     _onOpen();
     setItem(item);
-  }, [_onOpen, setItem]);
+    setIsBuy(!isUser);
+  }, [_onOpen, setItem, setIsBuy]);
 
   const onClose = useCallback(() => {
     _onClose();
@@ -31,11 +34,12 @@ export function TransactionProvider({ children }: PropsWithChildren<{}>) {
   const value = useMemo<TransactionContextValue>(
     () => ({
       isOpen,
+      isBuy,
       item,
       onOpen,
       onClose
     }),
-    [isOpen, item, onOpen, onClose]
+    [isOpen, isBuy, item, onOpen, onClose]
   );
 
   return <TransactionContext.Provider value={value}>{children}</TransactionContext.Provider>;

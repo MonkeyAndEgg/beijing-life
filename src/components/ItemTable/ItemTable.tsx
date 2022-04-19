@@ -7,26 +7,30 @@ import { useTransaction } from "../../context/useTransaction";
 import { Item } from "../../models/item";
 import Card from "../Card/Card";
 
+const STOCK = [
+  { id:'1', icon: MdCheckCircle, name: '进口香烟', price: 12 },
+  { id:'2', icon: MdCheckCircle, name: '上海小宝贝18禁', price: 135 },
+  { id:'3', icon: MdCheckCircle, name: '盗版VCD, 游戏', price: 50 },
+  { id:'4', icon: MdCheckCircle, name: '劣质白酒', price: 47 },
+  { id:'5', icon: MdCheckCircle, name: '伪劣化妆品', price: 788 },
+  { id:'6', icon: MdCheckCircle, name: '进口汽车', price: 156002 },
+  { id:'7', icon: MdCheckCircle, name: '假白酒', price: 220 }
+];
+
 const ItemTable = (props) => {
   const { onOpen } = useTransaction();
-  const [items, setItems] = useState([
-    { id:'1', icon: MdCheckCircle, name: '进口香烟', price: 12 },
-    { id:'2', icon: MdCheckCircle, name: '上海小宝贝18禁', price: 135 },
-    { id:'3', icon: MdCheckCircle, name: '盗版VCD, 游戏', price: 50 },
-    { id:'4', icon: MdCheckCircle, name: '劣质白酒', price: 47 },
-    { id:'5', icon: MdCheckCircle, name: '伪劣化妆品', price: 788 },
-    { id:'6', icon: MdCheckCircle, name: '进口汽车', price: 156002 },
-    { id:'7', icon: MdCheckCircle, name: '假白酒', price: 220 }
-  ]);
+  const [items, setItems] = useState([]);
 
   const itemHandler = (item: Item) => {
-    onOpen(item);
+    onOpen(item, props.isUser);
   };
   const user = useSelector((state: RootState) => state.user);
   
   useEffect(() => {
     if (props.isUser) {
       setItems(user.items);
+    } else {
+      setItems(STOCK);
     }
   }, [props.isUser, user.items, setItems])
 

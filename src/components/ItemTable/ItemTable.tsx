@@ -1,6 +1,11 @@
 import { Icon, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { AiOutlineCar, GiCigarette, BiBookHeart, ImVideoCamera, GiBeerBottle, RiMarkupLine, MdPhoneIphone, MdOutlineSmartToy } from 'react-icons/all'
+import { MdPhoneIphone, MdOutlineSmartToy } from 'react-icons/md';
+import { GiCigarette, GiBeerBottle } from 'react-icons/gi';
+import { AiOutlineCar } from 'react-icons/ai';
+import { BiBookHeart } from 'react-icons/bi';
+import { ImVideoCamera } from 'react-icons/im';
+import { RiMarkupLine } from 'react-icons/ri';
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { useTransaction } from "../../context/useTransaction";

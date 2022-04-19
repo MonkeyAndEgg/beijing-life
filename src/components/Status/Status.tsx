@@ -1,5 +1,9 @@
 import { Center, Code, List, ListIcon, ListItem, Stat, StatNumber, VStack } from "@chakra-ui/react";
-import { MdOutlineHealthAndSafety, GiPayMoney, BiCrown, RiMoneyCnyCircleLine, BsPiggyBank } from 'react-icons/all'
+import { MdOutlineHealthAndSafety } from 'react-icons/md';
+import { GiPayMoney } from 'react-icons/gi';
+import { BiCrown } from 'react-icons/bi';
+import { RiMoneyCnyCircleLine } from 'react-icons/ri';
+import { BsPiggyBank } from 'react-icons/bs';
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";

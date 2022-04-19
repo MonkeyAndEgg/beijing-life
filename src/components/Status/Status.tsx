@@ -1,5 +1,5 @@
 import { Center, Code, List, ListIcon, ListItem, Stat, StatNumber, VStack } from "@chakra-ui/react";
-import { MdMoney } from "react-icons/md";
+import { MdOutlineHealthAndSafety, GiPayMoney, BiCrown, RiMoneyCnyCircleLine, BsPiggyBank } from 'react-icons/all'
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";
@@ -16,32 +16,32 @@ const Status = () => {
         <List h="35vh" spacing={3} p={5}>
           <Center fontWeight='bold'>当前状态</Center>
           <ListItem>
-            <ListIcon as={MdMoney} />
+            <ListIcon as={RiMoneyCnyCircleLine} />
             现金余额
             <Stat color={TEXT_GREEN}>
               <StatNumber>￥{user.cash}</StatNumber>
             </Stat>
           </ListItem>
           <ListItem>
-            <ListIcon as={MdMoney} />
+            <ListIcon as={BsPiggyBank} />
             银行存款
             <Stat color={TEXT_GREEN}>
               <StatNumber>￥{user.deposit}</StatNumber>
             </Stat>
           </ListItem>
           <ListItem>
-            <ListIcon as={MdMoney} />
+            <ListIcon as={GiPayMoney} />
             当前负债
             <Stat color={TEXT_RED}>
               <StatNumber>￥{user.debt}</StatNumber>
             </Stat>
           </ListItem>
           <ListItem>
-            <ListIcon as={MdMoney} />
+            <ListIcon as={MdOutlineHealthAndSafety} />
             生命值：<Code color={TEXT_GREEN}>{user.health}</Code>   
           </ListItem>
           <ListItem>
-            <ListIcon as={MdMoney} />
+            <ListIcon as={BiCrown} />
             名声：<Code color={TEXT_GREEN}>{user.reputation}</Code> 
           </ListItem>
         </List>

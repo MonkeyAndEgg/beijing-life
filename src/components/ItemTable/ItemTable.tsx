@@ -1,4 +1,4 @@
-import { Icon, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { Icon, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { MdCheckCircle } from 'react-icons/md'
 import { useSelector } from "react-redux";
@@ -31,31 +31,33 @@ const ItemTable = (props) => {
   }, [props.isUser, user.items, setItems])
 
   return (
-    <Card>
-      <TableContainer w='100%' h='32vh' overflowY='auto'>
-        <Table variant='simple' size='sm'>
-          <TableCaption placement="top">{props.description}</TableCaption>
-          <Thead>
-            <Tr>
-              <Th></Th>
-              <Th>商品</Th>
-              <Th>价格</Th>
-              { props.isUser && <Th>仓库</Th> }
-            </Tr>
-          </Thead>
-          <Tbody>
-            {items && items.map((item: Item) => 
-              <Tr key={item.id} onClick={() => itemHandler(item)}>
-                <Td><Icon as={item.icon}></Icon></Td>
-                <Td>{item.name}</Td>
-                <Td>{item.price}</Td>
-                { props.isUser && <Td>{item.quantity}</Td>}
+    <VStack w='full' h='35vh' p={0} spacing={10} alignItems='flex-start'>
+      <Card>
+        <TableContainer w='100%' h='32vh' overflowY='auto'>
+          <Table variant='simple' size='sm'>
+            <TableCaption placement="top">{props.description}</TableCaption>
+            <Thead>
+              <Tr>
+                <Th></Th>
+                <Th>商品</Th>
+                <Th>价格</Th>
+                { props.isUser && <Th>仓库</Th> }
               </Tr>
-            )}
-          </Tbody>
-        </Table>
-      </TableContainer>
-    </Card>
+            </Thead>
+            <Tbody>
+              {items && items.map((item: Item) => 
+                <Tr key={item.id} onClick={() => itemHandler(item)}>
+                  <Td><Icon as={item.icon}></Icon></Td>
+                  <Td>{item.name}</Td>
+                  <Td>{item.price}</Td>
+                  { props.isUser && <Td>{item.quantity}</Td>}
+                </Tr>
+              )}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Card>
+    </VStack>
   );
 }
 

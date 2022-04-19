@@ -14,15 +14,11 @@ const HomePage = () => {
           <Image src='/images/dagongren.jpg' alt="早安,打工人"></Image>
         </Stack>
         <Flex h="35vh" padding={0}>
-          <VStack w='full' h='35vh' p={0} spacing={10} alignItems='flex-start'>
-            <ItemTable description='黑市'></ItemTable>
-          </VStack>
-        
+          <ItemTable description='黑市'></ItemTable>
+          
           <Transaction></Transaction>
 
-          <VStack w='full' h='35vh' p={0} spacing={10} alignItems='flex-start'>
-            <ItemTable isUser={true} description='您的出租屋'></ItemTable>
-          </VStack>
+          <ItemTable isUser={true} description='您的出租屋'></ItemTable>
         </Flex>
         <Flex h="35vh" py={0}>
           <Status></Status>

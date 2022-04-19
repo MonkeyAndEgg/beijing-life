@@ -1,5 +1,6 @@
 import { Container, Flex, Stack, VStack, Image } from "@chakra-ui/react";
 import ItemTable from "../src/components/ItemTable/ItemTable";
+import Stations from "../src/components/Stations/Stations";
 import Status from "../src/components/Status/Status";
 import Transaction from "../src/components/Transaction/Transaction";
 import TransactionModal from "../src/components/TransactionModal/TransactionModal";
@@ -23,9 +24,9 @@ const HomePage = () => {
             <ItemTable isUser={true} description='您的出租屋'></ItemTable>
           </VStack>
         </Flex>
-        <Flex h="50vh" py={0}>
+        <Flex h="35vh" py={0}>
           <Status></Status>
-          <VStack w='full' h='35vh' bgColor='purple'></VStack>
+          <Stations></Stations>
         </Flex>
       </Container>
       <TransactionModal></TransactionModal>

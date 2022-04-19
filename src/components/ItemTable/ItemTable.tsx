@@ -41,7 +41,7 @@ const ItemTable = (props) => {
   }, [props.isUser, user.items, setItems])
 
   return (
-    <VStack w='full' h='35vh' p={0} spacing={10} alignItems='flex-start'>
+    <VStack w='full' h='35vh' p={0} alignItems='flex-start'>
       <Card>
         <TableContainer w='100%' h='32vh' overflowY='auto'>
           <Table variant='simple'>
@@ -56,7 +56,7 @@ const ItemTable = (props) => {
             </Thead>
             <Tbody>
               {items && items.map((item: Item) => 
-                <Tr key={item.id}  color='yellow.700' onClick={() => itemHandler(item)}>
+                <Tr key={item.id} cursor='pointer'  color='yellow.700' onClick={() => itemHandler(item)}>
                   <Td><Icon as={item.icon}></Icon></Td>
                   <Td>{item.name}</Td>
                   <Td>{item.price}</Td>

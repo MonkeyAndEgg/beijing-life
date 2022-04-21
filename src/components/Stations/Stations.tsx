@@ -1,4 +1,4 @@
-import { Button, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr, VStack } from "@chakra-ui/react";
+import { Button, Table, TableCaption, TableContainer, Tbody, Td, Tr, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import Card from "../Card/Card";
 
@@ -57,6 +57,10 @@ const Stations = () => {
       } else {
         setStations(STATIONS_LABELS_A);
       }
+    } else if (action === ACTION_HIDING) {
+
+    } else {
+      // next day
     }
   };
 
@@ -69,7 +73,7 @@ const Stations = () => {
             <Tbody>
               { stations && stations.map((row, index) => {
                 return (<Tr key={index}>{row.map((station, index) => {
-                  return (<Td key={index}><Button onClick={() => stationHandler(station.action)}>{station.label}</Button></Td>);
+                  return (<Td key={index}><Button colorScheme='telegram' variant={station.action === ACTION_NEXT_STATION ? 'solid': 'ghost'} onClick={() => stationHandler(station.action)}>{station.label}</Button></Td>);
                 })}</Tr>);
               }) }
             </Tbody>

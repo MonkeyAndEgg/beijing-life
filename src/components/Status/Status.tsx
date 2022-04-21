@@ -15,9 +15,9 @@ const Status = () => {
   const user: UserState = useSelector((state: RootState) => state.user);
 
   return (
-    <VStack w='25vw' h='35vh' marginRight={5}>
+    <VStack w='25vw' h='40vh' marginRight={5}>
       <Card>
-        <List h="35vh" spacing={3} p={5} overflowY='auto'>
+        <List h="40vh" spacing={4} p={5} overflowY='auto'>
           <Center fontWeight='bold'>当前状态</Center>
           <ListItem>
             <ListIcon as={RiMoneyCnyCircleLine} />

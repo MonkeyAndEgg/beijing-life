@@ -1,31 +1,16 @@
 import { Icon, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { MdPhoneIphone, MdOutlineSmartToy } from 'react-icons/md';
-import { GiCigarette, GiBeerBottle } from 'react-icons/gi';
-import { AiOutlineCar } from 'react-icons/ai';
-import { BiBookHeart } from 'react-icons/bi';
-import { ImVideoCamera } from 'react-icons/im';
-import { RiMarkupLine } from 'react-icons/ri';
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { useTransaction } from "../../context/useTransaction";
+import useStockItems from "../../hooks/useStockItems";
 import { Item } from "../../models/item";
 import Card from "../Card/Card";
-
-const STOCK = [
-  { id:'1', icon: GiCigarette, name: '进口香烟', price: 12 },
-  { id:'2', icon: BiBookHeart, name: '上海小宝贝18禁', price: 135 },
-  { id:'3', icon: ImVideoCamera, name: '盗版VCD, 游戏', price: 50 },
-  { id:'4', icon: GiBeerBottle, name: '劣质白酒', price: 47 },
-  { id:'5', icon: RiMarkupLine, name: '伪劣化妆品', price: 788 },
-  { id:'6', icon: AiOutlineCar, name: '进口汽车', price: 156002 },
-  { id:'7', icon: MdPhoneIphone, name: '水货手机', price: 1200 },
-  { id:'8', icon: MdOutlineSmartToy, name: '进口玩具', price: 99 },
-];
 
 const ItemTable = (props) => {
   const { onOpen } = useTransaction();
   const [items, setItems] = useState([]);
+  const stock = useStockItems();
 
   const itemHandler = (item: Item) => {
     onOpen(item, props.isUser);
@@ -36,9 +21,9 @@ const ItemTable = (props) => {
     if (props.isUser) {
       setItems(user.items);
     } else {
-      setItems(STOCK);
+      setItems(stock);
     }
-  }, [props.isUser, user.items, setItems])
+  }, [stock, props.isUser, user.items, setItems])
 
   return (
     <VStack w='full' h='35vh' p={0} alignItems='flex-start'>

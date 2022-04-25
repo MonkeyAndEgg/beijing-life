@@ -1,4 +1,7 @@
-import { Container, Flex, Stack, VStack, Image } from "@chakra-ui/react";
+import { Container, Flex, Stack, Text, Image, Center  } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/reducers/rootReducer";
+import { UserState } from "../redux/reducers/user";
 import ItemTable from "../src/components/ItemTable/ItemTable";
 import Stations from "../src/components/Stations/Stations";
 import Status from "../src/components/Status/Status";
@@ -7,11 +10,17 @@ import TransactionModal from "../src/components/TransactionModal/TransactionModa
 import { TransactionProvider } from "../src/context/useTransaction";
 
 const HomePage = () => {
+  const user: UserState = useSelector((state: RootState) => state.user);
+
   return (
     <TransactionProvider>
       <Container maxW='container.lg' p={0}>
-        <Stack h="15vh" direction='row'>
+        <Stack h="15vh" direction='row' justifyContent='space-between'>
           <Image src='/images/dagongren.jpg' alt="早安,打工人"></Image>
+          <Center>
+            <Text>俺在北京的日子还剩{user.daysLeft}天</Text>
+          </Center >
+          <Image src='/images/dagongren-2.jpg' alt="加油,打工人"></Image>
         </Stack>
         <Flex h="35vh" padding={0}>
           <ItemTable description='黑市'></ItemTable>

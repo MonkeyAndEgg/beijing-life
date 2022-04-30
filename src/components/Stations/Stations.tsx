@@ -1,5 +1,6 @@
 import { Button, Table, TableCaption, TableContainer, Tbody, Td, Tr, VStack } from "@chakra-ui/react";
 import { useState } from "react";
+import useNextDay from "../../hooks/useNextDay";
 import Card from "../Card/Card";
 
 const ACTION_SWITCH_STATONS = 'switch stations';
@@ -49,6 +50,7 @@ const STATIONS_LABELS_B = [
 
 const Stations = () => {
   const [stations, setStations] = useState(STATIONS_LABELS_A);
+  const processNextDay = useNextDay();
 
   const stationHandler = (action: string) => {
     if (action === ACTION_SWITCH_STATONS) {
@@ -61,6 +63,7 @@ const Stations = () => {
 
     } else {
       // next day
+      processNextDay();
     }
   };
 

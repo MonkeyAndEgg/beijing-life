@@ -35,3 +35,8 @@ export const SetUserReputation = (reputation: number) => ({
   type: t.SET_USER_REPUTATION,
   payload: reputation
 });
+
+export const SetUserMaxCapacity = (maxCapacity: number) => ({
+  type: t.SET_USER_MAX_CAPACITY,
+  payload: maxCapacity
+});

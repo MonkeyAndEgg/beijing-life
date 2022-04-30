@@ -9,6 +9,7 @@ export interface UserState {
   items: Item[];
   daysLeft: number;
   reputation: number;
+  maxCapacity: number;
 }
 
 const initalState: UserState = {
@@ -18,7 +19,8 @@ const initalState: UserState = {
   debt: 5500,
   items: [],
   daysLeft: 40,
-  reputation: 100
+  reputation: 100,
+  maxCapacity: 100,
 };
 
 const user = (state = initalState, action) => {
@@ -57,6 +59,11 @@ const user = (state = initalState, action) => {
       return {
         ...state,
         reputation: action.payload
+      };
+    case t.SET_USER_MAX_CAPACITY:
+      return {
+        ...state,
+        maxCapacity: action.payload
       };
     default:
       return { ...state };

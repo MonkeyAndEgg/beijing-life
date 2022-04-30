@@ -1,4 +1,4 @@
-import { Container, Flex, Stack, Text, Image, Center  } from "@chakra-ui/react";
+import { Container, Flex, Stack, Text, Image, Center, VStack  } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducers/rootReducer";
 import { UserState } from "../redux/reducers/user";
@@ -8,6 +8,7 @@ import Stations from "../src/components/Stations/Stations";
 import Status from "../src/components/Status/Status";
 import Transaction from "../src/components/Transaction/Transaction";
 import TransactionModal from "../src/components/TransactionModal/TransactionModal";
+import { ReputationMap } from "../src/constants/reputation";
 import { EventProvider } from "../src/context/useEvent";
 import { TransactionProvider } from "../src/context/useTransaction";
 
@@ -20,9 +21,10 @@ const HomePage = () => {
         <Container maxW='container.lg' p={0}>
           <Stack h="15vh" direction='row' justifyContent='space-between'>
             <Image src='/images/dagongren.jpg' alt="早安,打工人"></Image>
-            <Center>
+            <VStack justifyContent='center'>
               <Text>俺在北京的日子还剩{user.daysLeft}天</Text>
-            </Center >
+              <Text>当前称号：{ ReputationMap.get(user.reputation) }</Text>
+            </VStack >
             <Image src='/images/dagongren-2.jpg' alt="加油,打工人"></Image>
           </Stack>
           <Flex h="35vh" padding={0}>

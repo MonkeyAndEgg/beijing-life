@@ -10,3 +10,6 @@ export const StockMultiplierMap = new Map([
   [ CD, { min: 0.7, max: 4, mad: 50 } ],
   [ TOY, { min: 0.7, max: 2, mad: 10 } ],
 ]);
+
+// the rate that charges each day on debt
+export const DebtRate = 0.1;

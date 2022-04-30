@@ -6,9 +6,11 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserCash, setUserCurrCapacity, setUserItems } from "../../../redux/actions/user";
+import { setUserCash, setUserCurrCapacity, setUserItems, setUserReputation } from "../../../redux/actions/user";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";
+import { businessEvents } from "../../constants/businessEvents";
+import { useEvent } from "../../context/useEvent";
 import { useTransaction } from "../../context/useTransaction";
 import { Item } from "../../models/item";
 
@@ -18,6 +20,7 @@ const TransactionModal = () => {
   const [ maxQuantity, setMaxQuantity ] = useState(0);
   const user: UserState= useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
+  const { onOpen } = useEvent();
 
   useEffect(() => {
     if (isOpen) {
@@ -59,6 +62,18 @@ const TransactionModal = () => {
           updateList[index] = updateItem;
         }
         remainingCash = user.cash + selectedItem.price * quantity;
+
+        if (selectedItem.reputation) {
+          const targetEvent = businessEvents.find(event => event.type === selectedItem.name);
+          let updatedReputation = user.reputation + selectedItem.reputation;
+          if (updatedReputation > 100) {
+            updatedReputation = 100;
+          } else if (updatedReputation < 0) {
+            updatedReputation = 0;
+          }
+          dispatch(setUserReputation(updatedReputation));
+          onOpen({ msg: `卖${targetEvent.type}危害社会，俺的名声降低了。`, img: targetEvent.img });
+        }
       }
       
       const currentTotalStockNum = updateList.reduce((acc, item) => acc + item.quantity, 0);

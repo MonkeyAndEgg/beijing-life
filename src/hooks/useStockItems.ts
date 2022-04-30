@@ -17,7 +17,7 @@ const STOCK = [
   { id:'1', icon: GiCigarette, name: CIGARETTE, price: 200 },
   { id:'2', icon: BiBookHeart, name: PORN, price: 1500 },
   { id:'3', icon: ImVideoCamera, name: CD, price: 50 },
-  { id:'4', icon: GiBeerBottle, name: ALCOHOL, price: 400 },
+  { id:'4', icon: GiBeerBottle, name: ALCOHOL, price: 400, reputation: -10 },
   { id:'5', icon: RiMarkupLine, name: COSMETIC, price: 800 },
   { id:'6', icon: AiOutlineCar, name: CAR, price: 50000 },
   { id:'7', icon: MdPhoneIphone, name: PHONES, price: 1200 },

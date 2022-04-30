@@ -36,7 +36,7 @@ const ItemTable = (props) => {
                 <Th></Th>
                 <Th>商品</Th>
                 <Th>价格</Th>
-                { props.isUser && <Th>仓库</Th> }
+                { props.isUser && <Th>仓库({user.currCapacity}/{user.maxCapacity})</Th> }
               </Tr>
             </Thead>
             <Tbody>

@@ -6,7 +6,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserCash, setUserItems } from "../../../redux/actions/user";
+import { setUserCash, setUserCurrCapacity, setUserItems } from "../../../redux/actions/user";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";
 import { useTransaction } from "../../context/useTransaction";
@@ -21,8 +21,14 @@ const TransactionModal = () => {
 
   useEffect(() => {
     if (isOpen) {
-      const maxNum = isBuy ?
-        Math.floor(user.cash / selectedItem.price) : user.items.find(item => item.name === selectedItem.name).quantity;
+      let maxNum: number;
+      if (isBuy) {
+        const availableToBuy = user.maxCapacity - user.currCapacity;
+        const cashToBuy = Math.floor(user.cash / selectedItem.price);
+        maxNum = cashToBuy > availableToBuy ? availableToBuy : cashToBuy;
+      } else {
+        maxNum = user.items.find(item => item.name === selectedItem.name).quantity;
+      }
       setMaxQuantity(maxNum);
     }
   }, [isOpen, isBuy, user, selectedItem])
@@ -54,7 +60,10 @@ const TransactionModal = () => {
         }
         remainingCash = user.cash + selectedItem.price * quantity;
       }
-
+      
+      const currentTotalStockNum = updateList.reduce((acc, item) => acc + item.quantity, 0);
+      
+      dispatch(setUserCurrCapacity(currentTotalStockNum));
       dispatch(setUserItems(updateList));
       dispatch(setUserCash(remainingCash));
     }

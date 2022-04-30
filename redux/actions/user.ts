@@ -31,12 +31,17 @@ export const setUserDaysLeft = (daysLeft: number) => ({
   payload: daysLeft
 });
 
-export const SetUserReputation = (reputation: number) => ({
+export const setUserReputation = (reputation: number) => ({
   type: t.SET_USER_REPUTATION,
   payload: reputation
 });
 
-export const SetUserMaxCapacity = (maxCapacity: number) => ({
+export const setUserMaxCapacity = (maxCapacity: number) => ({
   type: t.SET_USER_MAX_CAPACITY,
   payload: maxCapacity
+});
+
+export const setUserCurrCapacity = (currCapacity: number) => ({
+  type: t.SET_USER_CURR_CAPACITY,
+  payload: currCapacity
 });

@@ -9,6 +9,7 @@ export interface UserState {
   items: Item[];
   daysLeft: number;
   reputation: number;
+  currCapacity: number;
   maxCapacity: number;
 }
 
@@ -20,6 +21,7 @@ const initalState: UserState = {
   items: [],
   daysLeft: 40,
   reputation: 100,
+  currCapacity: 0,
   maxCapacity: 100,
 };
 
@@ -64,6 +66,11 @@ const user = (state = initalState, action) => {
       return {
         ...state,
         maxCapacity: action.payload
+      };
+    case t.SET_USER_CURR_CAPACITY:
+      return {
+        ...state,
+        currCapacity: action.payload
       };
     default:
       return { ...state };

@@ -1,4 +1,4 @@
-import { BusinessEvent } from "../../src/hooks/useBusinessEvent";
+import { BusinessEvent } from '../../src/models/businessEvent';
 import * as t from '../types';
 
 export interface EventState {

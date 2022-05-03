@@ -13,15 +13,15 @@ const ItemTable = (props) => {
   const itemHandler = (item: Item) => {
     onOpen(item, props.isUser);
   };
-  const state = useSelector((state: RootState) => state);
+  const { user, market } = useSelector((state: RootState) => state);
   
   useEffect(() => {
     if (props.isUser) {
-      setItems(state.user.items);
+      setItems(user.items);
     } else {
-      setItems(state.market.items);
+      setItems(market.items);
     }
-  }, [state.market.items, props.isUser, state.user.items, setItems])
+  }, [market.items, props.isUser, user.items, setItems])
 
   return (
     <VStack w='full' h='35vh' p={0} alignItems='flex-start'>
@@ -34,7 +34,7 @@ const ItemTable = (props) => {
                 <Th></Th>
                 <Th>商品</Th>
                 <Th>价格</Th>
-                { props.isUser && <Th>仓库({state.user.currCapacity}/{state.user.maxCapacity})</Th> }
+                { props.isUser && <Th>仓库({user.currCapacity}/{user.maxCapacity})</Th> }
               </Tr>
             </Thead>
             <Tbody>

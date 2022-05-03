@@ -31,15 +31,15 @@ const STOCK = [
 
 const useNextDay = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state: RootState) => state);
+  const { user, events } = useSelector((state: RootState) => state);
   const { onOpen } = useEvent();
 
   useEffect(() => {
-    const newBusinessEvent = state.events.businessEvent;
+    const newBusinessEvent = events.businessEvent;
     if (newBusinessEvent && newBusinessEvent.event) {
       onOpen({ msg: newBusinessEvent.event, img: newBusinessEvent.img });
     }
-  }, [state.events.businessEvent, onOpen]);
+  }, [events.businessEvent, onOpen]);
 
   useEffect(() => {
     const newStock = arrayShuffle(STOCK);
@@ -57,7 +57,7 @@ const useNextDay = () => {
     // random business event
     const randomIndex = randomInteger(0, 30);
     const randomItem = updatedStock[randomIndex];
-    if (state.user.daysLeft < 40 && randomItem) {
+    if (user.daysLeft < 40 && randomItem) {
       const newBusinessEvents = businessEvents.filter(event => event.type === randomItem.name);
       const shuffledList = arrayShuffle(newBusinessEvents);
       const newBusinessEvent = shuffledList.pop();
@@ -70,13 +70,13 @@ const useNextDay = () => {
     }
 
     dispatch(setMarketItems(updatedStock));
-  }, [dispatch, state.user.daysLeft]);
+  }, [dispatch, user.daysLeft]);
 
   const processNextDay = () => {
-    const updatedDaysLeft = state.user.daysLeft - 1;
+    const updatedDaysLeft = user.daysLeft - 1;
     dispatch(setUserDaysLeft(updatedDaysLeft));
 
-    const updatedDebt = Math.floor(state.user.debt * (1 + DebtRate));
+    const updatedDebt = Math.floor(user.debt * (1 + DebtRate));
     dispatch(setUserDebt(updatedDebt));
   };
 

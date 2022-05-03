@@ -3,27 +3,25 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { useTransaction } from "../../context/useTransaction";
-import useStockItems from "../../hooks/useStockItems";
 import { Item } from "../../models/item";
 import Card from "../Card/Card";
 
 const ItemTable = (props) => {
   const { onOpen } = useTransaction();
   const [items, setItems] = useState([]);
-  const stock = useStockItems();
 
   const itemHandler = (item: Item) => {
     onOpen(item, props.isUser);
   };
-  const user = useSelector((state: RootState) => state.user);
+  const state = useSelector((state: RootState) => state);
   
   useEffect(() => {
     if (props.isUser) {
-      setItems(user.items);
+      setItems(state.user.items);
     } else {
-      setItems(stock);
+      setItems(state.market.items);
     }
-  }, [stock, props.isUser, user.items, setItems])
+  }, [state.market.items, props.isUser, state.user.items, setItems])
 
   return (
     <VStack w='full' h='35vh' p={0} alignItems='flex-start'>
@@ -36,7 +34,7 @@ const ItemTable = (props) => {
                 <Th></Th>
                 <Th>商品</Th>
                 <Th>价格</Th>
-                { props.isUser && <Th>仓库({user.currCapacity}/{user.maxCapacity})</Th> }
+                { props.isUser && <Th>仓库({state.user.currCapacity}/{state.user.maxCapacity})</Th> }
               </Tr>
             </Thead>
             <Tbody>

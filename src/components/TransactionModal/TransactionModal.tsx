@@ -18,7 +18,7 @@ const TransactionModal = () => {
   const { isOpen, isBuy, item: selectedItem, onClose } = useTransaction();
   const [ quantity, setQuantity ] = useState(0);
   const [ maxQuantity, setMaxQuantity ] = useState(0);
-  const user: UserState= useSelector((state: RootState) => state.user);
+  const { user, market }= useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const { onOpen } = useEvent();
 
@@ -61,7 +61,8 @@ const TransactionModal = () => {
           updateItem.quantity -= quantity;
           updateList[index] = updateItem;
         }
-        remainingCash = user.cash + selectedItem.price * quantity;
+        const targetMarketPrice = market.items.find(item => item.name === selectedItem.name).price;
+        remainingCash = user.cash + targetMarketPrice * quantity;
 
         if (selectedItem.reputation) {
           const targetEvent = businessEvents.find(event => event.type === selectedItem.name);

@@ -1,6 +1,6 @@
-export interface BusinessEvent {
-  event: string;
+import { BasicEvent } from "./basicEvent";
+
+export interface BusinessEvent extends BasicEvent {
   type: string;
-  isPriceUp: boolean;
-  img: string;
+  isPriceUp?: boolean;
 }

@@ -11,4 +11,13 @@ export const businessEvents: BusinessEvent[] = [
   { event: '北京的学生们开始找工作，水货手机大受欢迎！', type: PHONES, isPriceUp: true, img: '/images/phones.jpg' },
   { event: '北京有人狂饮山西假酒，可以卖出天价！', type: ALCOHOL, isPriceUp: true, img: '/images/alcohol.jpg' },
   { event: '市场山充斥着来自福建的走私香烟', type: CIGARETTE, isPriceUp: false, img: '/images/cigar.jpg' },
+  { event: '俺老乡回家前把一些山西假白酒给俺！', type: ALCOHOL, img: '/images/alcohol.jpg' },
+  { event: '厦门的老同学资助俺几辆走私汽车。', type: CAR, img: '/images/car.jpg' },
+  { event: '工商局扫荡后，俺在黑暗角落里发现了老乡丢失的进口香烟。', type: CIGARETTE, img: '/images/cigar.jpg' },
+  { event: '日本产品又出事故！日本人死不认帐，拒绝赔偿！村长把他的水货手机用高价强卖给俺。', type: PHONES, img: '/images/phones.jpg' },
+  { event: '专家提议提高大学生“动手素质”, 进口玩具大受欢迎。', type: TOY, isPriceUp: true, img: '/images/toy.jpg' },
+  { event: '有人说：生病不用打针吃药，喝假白酒（剧毒）就可以!', type: ALCOHOL, isPriceUp: true, img: '/images/alcohol.jpg' },
+  { event: '医院的秘密报告：“《上海小宝贝》功效甚过伟哥”!', type: PORN, isPriceUp: true, img: '/images/porn.jpg' },
+  { event: '文盲说：“2000年诺贝尔文学奖？呸！不如盗版VCD港台片。”', type: CD, isPriceUp: true, img: '/images/cd.jpg' },
+  { event: '北京的富人疯狂地购买走私汽车！', type: CAR, isPriceUp: true, img: '/images/car.jpg' }
 ];

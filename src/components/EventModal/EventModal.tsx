@@ -2,7 +2,7 @@ import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, 
 import { useEvent } from "../../context/useEvent";
 
 const EventModal = () => {
-  const { isOpen, event, onClose } = useEvent();
+  const { isOpen, events, onClose } = useEvent();
 
   const closeDialog = () => {
     onClose();
@@ -15,11 +15,17 @@ const EventModal = () => {
         <ModalHeader>事件</ModalHeader>
         <ModalCloseButton></ModalCloseButton>
 
-        <HStack justify='center' my={5}>
-          <Image w={20} src={event.img} alt="事件小图片"></Image>
-        </HStack>
         <ModalBody>
-          {event.msg}
+          {
+            events.length > 0 && events.map(event =>
+              <>
+                <HStack justify='center' my={5}>
+                  <Image w={20} src={event.img} alt="事件小图片"></Image>
+                </HStack>
+                {event.msg}
+              </>
+            )
+          }
         </ModalBody>
 
         <ModalFooter>

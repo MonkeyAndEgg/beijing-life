@@ -4,8 +4,8 @@ import { EventModalData } from "../models/eventModalData";
 
 export interface EventContextValue {
   isOpen: boolean;
-  event: EventModalData;
-  onOpen: (event: EventModalData) => void;
+  events: EventModalData[];
+  onOpen: (events: EventModalData[]) => void;
   onClose: () => void
 }
 
@@ -17,11 +17,11 @@ export function useEvent() {
 
 export function EventProvider({ children }: PropsWithChildren<{}>) {
   const { isOpen, onOpen: _onOpen, onClose: _onClose } = useDisclosure();
-  const [ event, setEvent ] = useState({} as EventModalData);
+  const [ events, setEvents ] = useState([] as EventModalData[]);
 
-  const onOpen = useCallback((currentEvent: EventModalData) => {
+  const onOpen = useCallback((currentEvents: EventModalData[]) => {
     _onOpen();
-    setEvent(currentEvent);
+    setEvents(currentEvents);
   }, [_onOpen]);
 
   const onClose = useCallback(() => {
@@ -31,11 +31,11 @@ export function EventProvider({ children }: PropsWithChildren<{}>) {
   const value = useMemo<EventContextValue>(
     () => ({
       isOpen,
-      event,
+      events,
       onOpen,
       onClose
     }),
-    [isOpen, event, onOpen, onClose]
+    [isOpen, events, onOpen, onClose]
   );
 
   return <EventContext.Provider value={value}>{children}</EventContext.Provider>;

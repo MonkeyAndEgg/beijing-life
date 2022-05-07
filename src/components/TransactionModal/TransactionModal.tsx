@@ -73,7 +73,7 @@ const TransactionModal = () => {
             updatedReputation = 0;
           }
           dispatch(setUserReputation(updatedReputation));
-          onOpen({ msg: `卖${targetEvent.type}危害社会，俺的名声降低了。`, img: targetEvent.img });
+          onOpen([{ msg: `卖${targetEvent.type}危害社会，俺的名声降低了。`, img: targetEvent.img }]);
         }
       }
       

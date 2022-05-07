@@ -44,7 +44,9 @@ const TransactionModal = () => {
       if (isBuy) {
         if (index > -1) {
           const updateItem = updateList[index];
+          const newPrice = Math.floor((updateItem.price * updateItem.quantity + selectedItem.price * quantity) / (updateItem.quantity + quantity));
           updateItem.quantity += quantity;
+          updateItem.price = newPrice;
           updateList[index] = updateItem;
         } else {
           updateList.push({

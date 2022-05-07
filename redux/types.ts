@@ -15,3 +15,4 @@ export const SET_MARKET_ITEMS = 'Set Market items';
 // events action types
 export const SET_BUSINESS_EVENT = 'Set Business Event';
 export const SET_LIFE_EVENT = 'Set Life Event';
+export const SET_MONEY_EVENT = 'Set Money Event';

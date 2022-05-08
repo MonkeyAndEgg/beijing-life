@@ -12,12 +12,13 @@ import { randomInteger, randomNumber } from "../helper/util";
 import { StockMultiplierMap } from "../config/config";
 import { BusinessEvent } from "../models/businessEvent";
 import { businessEvents } from "../constants/businessEvents";
-import { setBusinessEvent, setLifeEvent } from "../../redux/actions/events";
+import { setBusinessEvent, setLifeEvent, setMoneyEvent } from "../../redux/actions/events";
 import { setMarketItems } from "../../redux/actions/market";
 import { lifeEvents } from "../constants/lifeEvents";
-import { setUserDaysLeft, setUserDebt, setUserHealth } from "../../redux/actions/user";
+import { setUserCash, setUserDaysLeft, setUserDebt, setUserHealth } from "../../redux/actions/user";
 import { useCallback, useState } from "react";
 import { EventModalData } from "../models/eventModalData";
+import { moneyEvents } from "../constants/moneyEvent";
 
 const STOCK = [
   { id:'1', icon: GiCigarette, name: CIGARETTE, price: 200 },
@@ -35,7 +36,7 @@ const useRandomEvents = () => {
   const { user } = useSelector((state: RootState) => state);
   const [ events, setEvents ] = useState([] as EventModalData[]);
   
-  const generateRandomEvents = useCallback(() => {
+  const generateRandomEvents = useCallback((cash?: number) => {
     const eventList: EventModalData[] = [];
     const newStock = arrayShuffle(STOCK);
     const updatedStock = [];
@@ -83,13 +84,23 @@ const useRandomEvents = () => {
         dispatch(setUserDebt(user.debt + healingCost));
         dispatch(setUserDaysLeft(user.daysLeft - 2));
       }
-
       eventList.push({ msg: randomLifeEvent.event, img: randomLifeEvent.img })
       const updatedHealth = user.health + randomLifeEvent.lifePoints;
       dispatch(setUserHealth(updatedHealth)); 
     }
-    setEvents(eventList);
     dispatch(setLifeEvent(randomLifeEvent));
+
+    // random money event
+    const randomMoneyEventIndex = randomInteger(0, 70);
+    let randomMoneyEvent = moneyEvents[randomMoneyEventIndex];
+    if (user.daysLeft < 40 && randomMoneyEvent) {
+      const updatedCash = Math.floor(cash * (1 - randomMoneyEvent.percent));
+      dispatch(setUserCash(updatedCash));
+      eventList.push({ msg: randomMoneyEvent.event, img: randomMoneyEvent.img });
+    }
+    dispatch(setMoneyEvent(randomMoneyEvent));
+
+    setEvents(eventList);
   }, [dispatch, user.daysLeft, user.debt, user.health]);
 
   return {

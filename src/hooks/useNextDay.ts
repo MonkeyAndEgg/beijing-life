@@ -27,7 +27,7 @@ const useNextDay = () => {
   }, [randomEvents, onOpen]);
 
   const processNextDay = () => {
-    generateRandomEvents();
+    generateRandomEvents(user.cash);
 
     const updatedDaysLeft = user.daysLeft - 1;
     dispatch(setUserDaysLeft(updatedDaysLeft));

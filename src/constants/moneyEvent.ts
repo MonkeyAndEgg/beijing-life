@@ -1,6 +1,6 @@
 import { MoneyEvent } from "../models/moneyEvent";
 
-export const lifeEvents: MoneyEvent[] = [
+export const moneyEvents: MoneyEvent[] = [
   { event: '俺怜悯扮演成乞丐的老太太们。俺的现金减少了10%', img: '', percent: 0.1 },
   { event: '一个汉子在街头拦住俺：“哥们，给点钱用!”，俺的现金减少了10%', img: '', percent: 0.1 },
   { event: '一个大个子碰了俺一下，说：“别挤了!”，俺的现金减少了40%', img: '', percent: 0.4 },

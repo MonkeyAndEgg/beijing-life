@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducers/rootReducer";
 import { UserState } from "../redux/reducers/user";
 import EventModal from "../src/components/EventModal/EventModal";
+import Footer from "../src/components/Footer/Footer";
 import ItemTable from "../src/components/ItemTable/ItemTable";
 import Stations from "../src/components/Stations/Stations";
 import Status from "../src/components/Status/Status";
@@ -20,27 +21,29 @@ const HomePage = () => {
       <EventProvider>
         <Container maxW='container.lg' p={0}>
           <Stack h="15vh" direction='row' justifyContent='space-between'>
-            <Image src='/images/dagongren.jpg' alt="早安,打工人"></Image>
+            <Image src='/images/dagongren.jpg' alt="早安,打工人" />
             <VStack justifyContent='center'>
               <Text>俺在北京的日子还剩{user.daysLeft}天</Text>
               <Text>当前称号：{ ReputationMap.get(user.reputation) }</Text>
             </VStack >
-            <Image src='/images/dagongren-2.jpg' alt="加油,打工人"></Image>
+            <Image src='/images/dagongren-2.jpg' alt="加油,打工人" />
           </Stack>
           <Flex h="35vh" padding={0}>
-            <ItemTable description='黑市'></ItemTable>
+            <ItemTable description='黑市' />
             
-            <Transaction></Transaction>
+            <Transaction />
 
-            <ItemTable isUser={true} description='您的出租屋'></ItemTable>
+            <ItemTable isUser={true} description='您的出租屋' />
           </Flex>
-          <Flex h="35vh" py={0}>
-            <Status></Status>
-            <Stations></Stations>
+          <Flex h="40vh" py={0} mb="20px">
+            <Status />
+            <Stations />
           </Flex>
+
+          <Footer />
         </Container>
-        <TransactionModal></TransactionModal>
-        <EventModal></EventModal>
+        <TransactionModal />
+        <EventModal />
       </EventProvider>
     </TransactionProvider>
   );

@@ -13,3 +13,6 @@ export const StockMultiplierMap = new Map([
 
 // the rate that charges each day on debt
 export const DebtRate = 0.1;
+
+// the rate that earn daily on bank deposit
+export const DepositRate = 0.01;

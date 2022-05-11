@@ -1,4 +1,4 @@
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, HStack, Image } from "@chakra-ui/react";
+import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, HStack, Image, Flex } from "@chakra-ui/react";
 import { useEvent } from "../../context/useEvent";
 
 const EventModal = () => {
@@ -18,12 +18,12 @@ const EventModal = () => {
         <ModalBody>
           {
             events.length > 0 && events.map(event =>
-              <>
+              <Flex key={event.msg} direction="column">
                 <HStack justify='center' my={5}>
-                  <Image w={20} src={event.img} alt="事件小图片"></Image>
+                  <Image w={40} src={event.img} alt="事件小图片"></Image>
                 </HStack>
                 {event.msg}
-              </>
+              </Flex>
             )
           }
         </ModalBody>

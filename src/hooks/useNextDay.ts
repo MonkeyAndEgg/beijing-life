@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserDaysLeft, setUserDebt } from "../../redux/actions/user";
+import { setUserDaysLeft, setUserDebt, setUserDeposit } from "../../redux/actions/user";
 import { RootState } from "../../redux/reducers/rootReducer";
-import { DebtRate } from "../config/config";
+import { DebtRate, DepositRate } from "../config/config";
 import { useEvent } from "../context/useEvent";
 import useRandomEvents from "./useRandomEvents";
 
@@ -32,8 +32,13 @@ const useNextDay = () => {
     const updatedDaysLeft = user.daysLeft - 1;
     dispatch(setUserDaysLeft(updatedDaysLeft));
 
+    // update debt
     const updatedDebt = Math.floor(user.debt * (1 + DebtRate));
     dispatch(setUserDebt(updatedDebt));
+
+    // update deposit
+    const updatedDeposit = Math.floor(user.deposit * (1 + DepositRate));
+    dispatch(setUserDeposit(updatedDeposit));
   };
 
   return processNextDay;

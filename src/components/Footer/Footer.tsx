@@ -1,9 +1,9 @@
 import { Button, Stack } from "@chakra-ui/react";
-import { BsBank2 } from "react-icons/bs";
-import { FaInternetExplorer, FaRegHospital } from "react-icons/fa";
+import { FaInternetExplorer } from "react-icons/fa";
 import { GiHouse, GiPostOffice } from "react-icons/gi";
 import BankModal from "../BankModal/BankModal";
 import Card from "../Card/Card";
+import HospitalModal from "../HospitalModal/HospitalModal";
 
 const Footer = () => {
 
@@ -11,10 +11,7 @@ const Footer = () => {
     <Card>
       <Stack direction="row" h="7vh" p="15px" justifyContent="space-between">
         <BankModal />
-
-        <Button leftIcon={<FaRegHospital />} colorScheme='blue' variant='outline'>
-          医院
-        </Button>
+        <HospitalModal />
 
         <Button leftIcon={<GiPostOffice />} colorScheme='blue' variant='outline'>
           邮局

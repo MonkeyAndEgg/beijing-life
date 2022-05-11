@@ -1,4 +1,4 @@
-import { Container, Flex, Stack, Text, Image, Center, VStack  } from "@chakra-ui/react";
+import { Container, Flex, Stack, Text, Image, VStack } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducers/rootReducer";
 import { UserState } from "../redux/reducers/user";
@@ -7,7 +7,6 @@ import Footer from "../src/components/Footer/Footer";
 import ItemTable from "../src/components/ItemTable/ItemTable";
 import Stations from "../src/components/Stations/Stations";
 import Status from "../src/components/Status/Status";
-import Transaction from "../src/components/Transaction/Transaction";
 import TransactionModal from "../src/components/TransactionModal/TransactionModal";
 import { ReputationMap } from "../src/constants/reputation";
 import { EventProvider } from "../src/context/useEvent";
@@ -28,13 +27,10 @@ const HomePage = () => {
             </VStack >
             <Image src='/images/dagongren-2.jpg' alt="加油,打工人" />
           </Stack>
-          <Flex h="35vh" padding={0}>
+          <Stack h="35vh" padding={0} spacing="40px" direction="row">
             <ItemTable description='黑市' />
-            
-            <Transaction />
-
             <ItemTable isUser={true} description='您的出租屋' />
-          </Flex>
+          </Stack>
           <Flex h="40vh" py={0} mb="20px">
             <Status />
             <Stations />

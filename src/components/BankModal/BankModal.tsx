@@ -8,15 +8,13 @@ import { UserState } from "../../../redux/reducers/user";
 
 const BankModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen: isServiceOpen, onOpen: onServiceOpen, onClose: onServiceClose } = useDisclosure();
-  const [isDeposit, setIsDeposit] = useState(true);
-  const [amount, setAmount] = useState(0);
+  const [ isDeposit, setIsDeposit ] = useState(null);
+  const [ amount, setAmount ] = useState(0);
   const user: UserState = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
   const depositHandler = (isDeposit: boolean) => {
     setIsDeposit(isDeposit);
-    onServiceOpen();
   };
 
   const transactionHandler = () => {
@@ -35,8 +33,9 @@ const BankModal = () => {
   };
 
   const onCloseServiceModal = () => {
+    setIsDeposit(null);
     setAmount(0);
-    onServiceClose();
+    onClose();
   };
   
   return (
@@ -45,62 +44,62 @@ const BankModal = () => {
         银行
       </Button>
 
-      <Modal isCentered isOpen={isOpen} onClose={onClose}>
+      <Modal isCentered isOpen={isOpen} onClose={onCloseServiceModal}>
         <ModalOverlay></ModalOverlay>
         <ModalContent>
           <ModalHeader>人民银行</ModalHeader>
           <ModalCloseButton></ModalCloseButton>
 
-          <ModalBody>
-            <HStack justify='center' my={5}>
-              <Image w={40} src="/images/bank.jpg" alt="银行小图片" />
-            </HStack>
-           {`客户您好！您当前的现金为￥${user.cash}。当前存款余额为￥${user.deposit}。请问您是要办理什么业务？`}
-          </ModalBody>
+          {
+            isDeposit === null ? (
+              <>
+                <ModalBody>
+                  <HStack justify='center' my={5}>
+                    <Image w={40} src="/images/bank.jpg" alt="银行小图片" />
+                  </HStack>
+                {`客户您好！您当前的现金为￥${user.cash}。当前存款余额为￥${user.deposit}。请问您是要办理什么业务？`}
+                </ModalBody>
 
-          <ModalFooter justifyContent="space-between">
-            <Button variant='outline' mr={3} onClick={() => depositHandler(true)}>
-              存钱
-            </Button>
-            <Button variant='outline' mr={3} onClick={() => depositHandler(false)}>
-              取钱
-            </Button>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              离开
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+                <ModalFooter justifyContent="space-between">
+                  <Button variant='outline' mr={3} onClick={() => depositHandler(true)}>
+                    存钱
+                  </Button>
+                  <Button variant='outline' mr={3} onClick={() => depositHandler(false)}>
+                    取钱
+                  </Button>
+                  <Button variant='outline' mr={3} onClick={onClose}>
+                    离开
+                  </Button>
+                </ModalFooter>
+              </>
+            ) : (
+              <>
+                <ModalBody>
+                  <HStack justify='center' my={5}>
+                    <Image w={40} src="/images/deposit.jpg" alt="存钱小图片" />
+                  </HStack>
+                  {isDeposit ? '您想存多少呢?' : '您想取多少呢?'}
+                  <NumberInput value={amount} min={0} max={isDeposit ? user.cash : user.deposit} my={5} onChange={(value) => setAmount(+value)} allowMouseWheel>
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+                </ModalBody>
 
-      <Modal isCentered isOpen={isServiceOpen} onClose={onCloseServiceModal}>
-        <ModalOverlay></ModalOverlay>
-        <ModalContent>
-          <ModalHeader>人民银行</ModalHeader>
-          <ModalCloseButton></ModalCloseButton>
+                <ModalFooter justifyContent="space-between">
+                  <Button variant='outline' mr={3} onClick={transactionHandler}>
+                    确认交易
+                  </Button>
 
-          <ModalBody>
-            <HStack justify='center' my={5}>
-              <Image w={40} src="/images/deposit.jpg" alt="存钱小图片" />
-            </HStack>
-            {isDeposit ? '您想存多少呢?' : '您想取多少呢?'}
-            <NumberInput value={amount} min={0} max={isDeposit ? user.cash : user.deposit} my={5} onChange={(value) => setAmount(+value)} allowMouseWheel>
-              <NumberInputField />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-          </ModalBody>
-
-          <ModalFooter justifyContent="space-between">
-            <Button variant='outline' mr={3} onClick={transactionHandler}>
-              确认交易
-            </Button>
-
-            <Button variant='outline' mr={3} onClick={onCloseServiceModal}>
-              取消交易
-            </Button>
-          </ModalFooter>
+                  <Button variant='outline' mr={3} onClick={onCloseServiceModal}>
+                    取消交易
+                  </Button>
+                </ModalFooter>
+              </>
+            )
+          }
         </ModalContent>
       </Modal>
     </>

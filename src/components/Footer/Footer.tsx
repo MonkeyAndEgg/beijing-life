@@ -4,6 +4,7 @@ import { GiHouse, GiPostOffice } from "react-icons/gi";
 import BankModal from "../BankModal/BankModal";
 import Card from "../Card/Card";
 import HospitalModal from "../HospitalModal/HospitalModal";
+import PostModal from "../PostModal/PostModal";
 
 const Footer = () => {
 
@@ -12,10 +13,7 @@ const Footer = () => {
       <Stack direction="row" h="7vh" p="15px" justifyContent="space-between">
         <BankModal />
         <HospitalModal />
-
-        <Button leftIcon={<GiPostOffice />} colorScheme='blue' variant='outline'>
-          邮局
-        </Button>
+        <PostModal />
 
         <Button leftIcon={<GiHouse />} colorScheme='blue' variant='outline'>
           租房中介

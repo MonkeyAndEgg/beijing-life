@@ -11,6 +11,7 @@ export interface UserState {
   reputation: number;
   currCapacity: number;
   maxCapacity: number;
+  maxNetCafeNum: number;
 }
 
 const initalState: UserState = {
@@ -23,6 +24,7 @@ const initalState: UserState = {
   reputation: 100,
   currCapacity: 0,
   maxCapacity: 100,
+  maxNetCafeNum: 3,
 };
 
 const user = (state = initalState, action) => {
@@ -71,6 +73,11 @@ const user = (state = initalState, action) => {
       return {
         ...state,
         currCapacity: action.payload
+      };
+    case t.SET_USER_MAX_NET_CAFE_NUM:
+      return {
+        ...state,
+        maxNetCafeNum: action.payload
       };
     default:
       return { ...state };

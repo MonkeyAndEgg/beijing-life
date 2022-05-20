@@ -1,8 +1,8 @@
-import { Button, Stack } from "@chakra-ui/react";
-import { FaInternetExplorer } from "react-icons/fa";
+import { Stack } from "@chakra-ui/react";
 import BankModal from "../BankModal/BankModal";
 import Card from "../Card/Card";
 import HospitalModal from "../HospitalModal/HospitalModal";
+import NetModal from "../NetModal/NetModal";
 import PostModal from "../PostModal/PostModal";
 import RentModal from "../RentModal/RentModal";
 
@@ -15,10 +15,7 @@ const Footer = () => {
         <HospitalModal />
         <PostModal />
         <RentModal />
-
-        <Button leftIcon={<FaInternetExplorer />} colorScheme='blue' variant='outline'>
-          网吧
-        </Button>
+        <NetModal />
       </Stack>
     </Card>
   );

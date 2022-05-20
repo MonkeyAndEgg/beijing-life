@@ -45,3 +45,8 @@ export const setUserCurrCapacity = (currCapacity: number) => ({
   type: t.SET_USER_CURR_CAPACITY,
   payload: currCapacity
 });
+
+export const setUserMaxNetCafeNum = (maxNetCafeNum: number) => ({
+  type: t.SET_USER_MAX_NET_CAFE_NUM,
+  payload: maxNetCafeNum
+});

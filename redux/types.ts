@@ -8,6 +8,7 @@ export const SET_USER_DAYS_LEFT = 'Set User Days Left';
 export const SET_USER_REPUTATION = 'Set User Reputation';
 export const SET_USER_MAX_CAPACITY = 'Set User Max Capacity';
 export const SET_USER_CURR_CAPACITY = 'Set User Current Capacity';
+export const SET_USER_MAX_NET_CAFE_NUM = 'Set User Max NetCafe Num';
 
 // market action types
 export const SET_MARKET_ITEMS = 'Set Market items';

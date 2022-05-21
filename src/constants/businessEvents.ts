@@ -14,7 +14,7 @@ export const businessEvents: BusinessEvent[] = [
   { event: '俺老乡回家前把一些山西假白酒给俺！', type: ALCOHOL, quantity: 7, img: '/images/alcohol.jpg' },
   { event: '厦门的老同学资助俺几辆走私汽车。', type: CAR, quantity: 2, img: '/images/car.jpg' },
   { event: '工商局扫荡后，俺在黑暗角落里发现了老乡丢失的进口香烟。', type: CIGARETTE, quantity: 6, img: '/images/cigar.jpg' },
-  { event: '日本产品又出事故！日本人死不认帐，拒绝赔偿！村长把他的水货手机用高价强卖给俺。', type: PHONES, quantity: 3, debt: 5000, img: '/images/phone.jpg' },
+  { event: '日本产品又出事故！日本人死不认帐，拒绝赔偿！村长把他的水货手机用高价强卖给俺。', type: PHONES, quantity: 3, debt: 5000, img: '/images/force.jpg' },
   { event: '专家提议提高大学生“动手素质”, 进口玩具大受欢迎。', type: TOY, isPriceUp: true, img: '/images/toy.jpg' },
   { event: '有人说：生病不用打针吃药，喝假白酒（剧毒）就可以!', type: ALCOHOL, isPriceUp: true, img: '/images/alcohol.jpg' },
   { event: '医院的秘密报告：“《上海小宝贝》功效甚过伟哥”!', type: PORN, isPriceUp: true, img: '/images/porn.jpg' },

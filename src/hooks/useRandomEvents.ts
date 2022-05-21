@@ -15,10 +15,11 @@ import { businessEvents } from "../constants/businessEvents";
 import { setBusinessEvent, setLifeEvent, setMoneyEvent } from "../../redux/actions/events";
 import { setMarketItems } from "../../redux/actions/market";
 import { lifeEvents } from "../constants/lifeEvents";
-import { setUserCash, setUserDaysLeft, setUserDebt, setUserHealth } from "../../redux/actions/user";
+import { setUserCash, setUserCurrCapacity, setUserDaysLeft, setUserDebt, setUserHealth, setUserItems } from "../../redux/actions/user";
 import { useCallback, useState } from "react";
 import { EventModalData } from "../models/eventModalData";
 import { moneyEvents } from "../constants/moneyEvent";
+import { Item } from "../models/item";
 
 const STOCK = [
   { id:'1', icon: GiCigarette, name: CIGARETTE, price: 200 },
@@ -58,12 +59,42 @@ const useRandomEvents = () => {
       const newBusinessEvents = businessEvents.filter(event => event.type === randomItem.name);
       const shuffledList = arrayShuffle(newBusinessEvents);
       newBusinessEvent = shuffledList.pop();
-      const newItem = { ...randomItem };
-      const stockItemOnMap = StockMultiplierMap.get(newItem.name);
-      newItem.price = newBusinessEvent.isPriceUp ? 
-        Math.floor(newItem.price * stockItemOnMap.mad) : Math.floor(newItem.price * 0.1);
-      updatedStock[randomIndex] = { ...newItem };
+      if (newBusinessEvent.quantity > 0) {
+        let updatedItems = user.items;
+        const existIndex = updatedItems.findIndex(item => item.name === newBusinessEvent.type);
+        const existItem = updatedItems[existIndex];
+        const targetStock = STOCK.find(stock => stock.name === newBusinessEvent.type);
+        const luckyItemPrice = 0;
+        const luckyQuantity = user.maxCapacity - user.currCapacity > newBusinessEvent.quantity ?
+          newBusinessEvent.quantity : user.maxCapacity - user.currCapacity;
+        if (existItem) {
+          existItem.price = Math.floor(
+            (existItem.price * existItem.quantity + luckyItemPrice * luckyQuantity) / (existItem.quantity + luckyQuantity)
+          );
+          existItem.quantity = existItem.quantity + luckyQuantity;
+          updatedItems[existIndex] = existItem;
+        } else {
+          updatedItems.push({
+            ...targetStock,
+            quantity: newBusinessEvent.quantity,
+            price: luckyItemPrice
+          } as Item);
+        }
+        const currentTotalStockNum = updatedItems.reduce((acc, item) => acc + item.quantity, 0);
       
+        if (newBusinessEvent.debt) {
+          dispatch(setUserDebt(Math.floor(user.debt + newBusinessEvent.debt)));
+        }
+        dispatch(setUserCurrCapacity(currentTotalStockNum));
+        dispatch(setUserItems(updatedItems));
+      } else {
+        const newItem = { ...randomItem };
+        const stockItemOnMap = StockMultiplierMap.get(newItem.name);
+        newItem.price = newBusinessEvent.isPriceUp ? 
+          Math.floor(newItem.price * stockItemOnMap.mad) : Math.floor(newItem.price * 0.1);
+        updatedStock[randomIndex] = { ...newItem };
+      }
+
       eventList.push({ msg: newBusinessEvent.event, img: newBusinessEvent.img });
     }
     dispatch(setBusinessEvent(newBusinessEvent));

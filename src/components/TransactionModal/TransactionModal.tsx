@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserCash, setUserCurrCapacity, setUserItems, setUserReputation } from "../../../redux/actions/user";
 import { RootState } from "../../../redux/reducers/rootReducer";
-import { UserState } from "../../../redux/reducers/user";
 import { businessEvents } from "../../constants/businessEvents";
 import { useEvent } from "../../context/useEvent";
 import { useTransaction } from "../../context/useTransaction";

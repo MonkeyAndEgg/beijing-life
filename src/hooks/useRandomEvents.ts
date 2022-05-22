@@ -104,12 +104,12 @@ const useRandomEvents = () => {
     const randomLifeEventIndex = randomInteger(0, 60);
     let randomLifeEvent = lifeEvents[randomLifeEventIndex];
     if (user.daysLeft < 40 && randomLifeEvent) {
-      if (user.health < 60) {
-        const randomHealingPoints = randomInteger(1, 100-user.health);
+      if (user.health < 50) {
+        const randomHealingPoints = randomInteger(1, 10);
         const healingCost = Math.floor(randomHealingPoints * 3500);
         randomLifeEvent = { 
           event: `由于不注意身体，我被人发现昏迷在复兴门附近的女厕所里。好心的市民把我抬到医院，医生让我治疗2天。村长让人为我垫付了住院费用${healingCost}元`,
-          img: '',
+          img: '/images/help.jpg',
           lifePoints: randomHealingPoints
         };
         dispatch(setUserDebt(user.debt + healingCost));

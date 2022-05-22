@@ -1,45 +1,39 @@
-import { Container, Flex, Stack, Text, Image, VStack } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/reducers/rootReducer";
-import { UserState } from "../redux/reducers/user";
+import { Container, Flex, Stack } from "@chakra-ui/react";
 import EventModal from "../src/components/EventModal/EventModal";
 import Footer from "../src/components/Footer/Footer";
+import Header from "../src/components/Header/Header";
+import InfoModal from "../src/components/InfoModal/InfoModal";
 import ItemTable from "../src/components/ItemTable/ItemTable";
 import Stations from "../src/components/Stations/Stations";
 import Status from "../src/components/Status/Status";
 import TransactionModal from "../src/components/TransactionModal/TransactionModal";
-import { ReputationMap } from "../src/constants/reputation";
 import { EventProvider } from "../src/context/useEvent";
+import { InfoProvider } from "../src/context/useInfo";
 import { TransactionProvider } from "../src/context/useTransaction";
 
 const HomePage = () => {
-  const user: UserState = useSelector((state: RootState) => state.user);
 
   return (
     <TransactionProvider>
       <EventProvider>
-        <Container maxW='container.lg' p={0}>
-          <Stack h="15vh" direction='row' justifyContent='space-between'>
-            <Image src='/images/dagongren.jpg' alt="早安,打工人" />
-            <VStack justifyContent='center'>
-              <Text>俺在北京的日子还剩{user.daysLeft}天</Text>
-              <Text>当前称号：{ ReputationMap.get(user.reputation) }</Text>
-            </VStack >
-            <Image src='/images/dagongren-2.jpg' alt="加油,打工人" />
-          </Stack>
-          <Stack h="35vh" padding={0} spacing="40px" direction="row">
-            <ItemTable description='黑市' />
-            <ItemTable isUser={true} description='您的出租屋' />
-          </Stack>
-          <Flex h="40vh" py={0} mb="20px">
-            <Status />
-            <Stations />
-          </Flex>
+        <InfoProvider>
+          <Container maxW='container.lg' p={0}>
+            <Header />
+            <Stack h="35vh" padding={0} spacing="40px" direction="row">
+              <ItemTable description='黑市' />
+              <ItemTable isUser={true} description='您的出租屋' />
+            </Stack>
+            <Flex h="40vh" py={0} mb="20px">
+              <Status />
+              <Stations />
+            </Flex>
 
-          <Footer />
-        </Container>
-        <TransactionModal />
-        <EventModal />
+            <Footer />
+          </Container>
+          <TransactionModal />
+          <EventModal />
+          <InfoModal />
+        </InfoProvider>
       </EventProvider>
     </TransactionProvider>
   );

@@ -15,8 +15,6 @@ const useNextDay = () => {
   useEffect(() => {
     if (user.daysLeft === 40) {
       generateRandomEvents();
-    } else if (user.daysLeft === 0) {
-      // end the game
     }
   }, [generateRandomEvents, user.daysLeft])
 

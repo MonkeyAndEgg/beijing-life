@@ -39,7 +39,7 @@ const TransactionModal = () => {
     if (quantity > 0) {
       const updateList = user.items;
       const index = updateList.findIndex(item => item.name === selectedItem.name);
-      let remainingCash: number;
+      let remainingCash = user.cash;
       if (isBuy) {
         if (index > -1) {
           const updateItem = updateList[index];
@@ -55,26 +55,31 @@ const TransactionModal = () => {
         }
         remainingCash = user.cash - selectedItem.price * quantity;
       } else {
-        if (quantity === updateList[index].quantity) {
-          updateList.splice(index, 1);
-        } else {
-          const updateItem = updateList[index];
-          updateItem.quantity -= quantity;
-          updateList[index] = updateItem;
-        }
-        const targetMarketPrice = market.items.find(item => item.name === selectedItem.name).price;
-        remainingCash = user.cash + targetMarketPrice * quantity;
-
-        if (selectedItem.reputation) {
-          const targetEvent = businessEvents.find(event => event.type === selectedItem.name);
-          let updatedReputation = user.reputation + selectedItem.reputation;
-          if (updatedReputation > 100) {
-            updatedReputation = 100;
-          } else if (updatedReputation < 0) {
-            updatedReputation = 0;
+        const targetMarketItem = market.items.find(item => item.name === selectedItem.name);
+        if (targetMarketItem) {
+          const targetMarketPrice = targetMarketItem.price;
+          if (quantity === updateList[index].quantity) {
+            updateList.splice(index, 1);
+          } else {
+            const updateItem = updateList[index];
+            updateItem.quantity -= quantity;
+            updateList[index] = updateItem;
           }
-          dispatch(setUserReputation(updatedReputation));
-          onOpen([{ msg: `卖${targetEvent.type}危害社会，俺的名声降低了。`, img: targetEvent.img }]);
+          remainingCash = user.cash + targetMarketPrice * quantity;
+  
+          if (selectedItem.reputation) {
+            const targetEvent = businessEvents.find(event => event.type === selectedItem.name);
+            let updatedReputation = user.reputation + selectedItem.reputation;
+            if (updatedReputation > 100) {
+              updatedReputation = 100;
+            } else if (updatedReputation < 0) {
+              updatedReputation = 0;
+            }
+            dispatch(setUserReputation(updatedReputation));
+            onOpen([{ msg: `卖${targetEvent.type}危害社会，俺的名声降低了。`, img: targetEvent.img }]);
+          }
+        } else {
+          onOpen([{ msg: `目前市场上没有人收${selectedItem.name}。。。`, img: '/images/reject.jpg' }]);
         }
       }
       

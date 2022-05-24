@@ -20,8 +20,10 @@ export function InfoProvider({ children }: PropsWithChildren<{}>) {
   const [ infoData, setInfoData ] = useState({} as InfoModalData);
 
   const onOpen = useCallback((infoData: InfoModalData) => {
-    _onOpen();
-    setInfoData(infoData);
+    if (infoData) {
+      _onOpen();
+      setInfoData(infoData);
+    }
   }, [_onOpen]);
 
   const onClose = useCallback(() => {

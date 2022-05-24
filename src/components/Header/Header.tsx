@@ -13,13 +13,7 @@ export default function Header() {
 
   useEffect(() => {
     let infoData: InfoModalData;
-    if (user.daysLeft === 39) {
-      infoData = {
-        header: '',
-        content: '',
-        footer: ''
-      };
-    } else if (user.daysLeft === 40) {
+  if (user.daysLeft === 40) {
       infoData = {
         header: '欢迎来到北京浮生记',
         content: `
@@ -31,13 +25,15 @@ export default function Header() {
           \n
           您将体验在北京卖盗版VCD和走私汽车的刺激，以及我们这个时代才有的搞笑事件。
         `,
-        footer: '开始游戏'
+        footer: '开始游戏',
+        img: '/images/work.jpg'
       };
     } else if (user.daysLeft === 1) {
       infoData = {
-        header: '',
-        content: '',
-        footer: ''
+        header: '最后一天',
+        content: '俺明天回老家，今天货物全部卖掉了。',
+        footer: '知道了',
+        img: '/images/clean.jpg'
       };
     }
     onOpen(infoData);

@@ -41,7 +41,8 @@ const useRandomEvents = () => {
     const eventList: EventModalData[] = [];
     const newStock = arrayShuffle(STOCK);
     const updatedStock = [];
-    const numOfStocksToUpdate = randomInteger(4,6);
+    // display all stock for the last and the day before last day
+    const numOfStocksToUpdate = user.daysLeft === 1 || user.daysLeft === 0 ? newStock.length : randomInteger(4,6);
     for (let i = 0; i < numOfStocksToUpdate; i++) {
       const poppedItem = newStock.pop();
       const stockItemOnMap = StockMultiplierMap.get(poppedItem.name);

@@ -31,7 +31,7 @@ export default function Header() {
     } else if (user.daysLeft === 1) {
       infoData = {
         header: '最后一天',
-        content: '俺明天回老家，今天货物全部卖掉了。',
+        content: '俺明天回老家，今天货物需要全部卖掉。',
         footer: '知道了',
         img: '/images/clean.jpg'
       };

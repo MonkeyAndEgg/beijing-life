@@ -37,12 +37,12 @@ const useRandomEvents = () => {
   const { user } = useSelector((state: RootState) => state);
   const [ events, setEvents ] = useState([] as EventModalData[]);
   
-  const generateRandomEvents = useCallback((cash?: number) => {
+  const generateRandomEvents = useCallback((cash?: number, daysLeft?: number) => {
     const eventList: EventModalData[] = [];
     const newStock = arrayShuffle(STOCK);
     const updatedStock = [];
     // display all stock for the last and the day before last day
-    const numOfStocksToUpdate = user.daysLeft === 1 || user.daysLeft === 0 ? newStock.length : randomInteger(4,6);
+    const numOfStocksToUpdate = daysLeft === 1 || daysLeft === 0 ? newStock.length : randomInteger(4,6);
     for (let i = 0; i < numOfStocksToUpdate; i++) {
       const poppedItem = newStock.pop();
       const stockItemOnMap = StockMultiplierMap.get(poppedItem.name);

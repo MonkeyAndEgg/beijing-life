@@ -14,7 +14,7 @@ const useNextDay = () => {
   const { events: randomEvents, generateRandomEvents } = useRandomEvents();
 
   useEffect(() => {
-    if (user.daysLeft === 40) {
+    if (user.daysLeft === 40 && market.items.length === 0) {
       generateRandomEvents();
     } else if (user.daysLeft === 0) {
       const currentItems: Item[] = user.items;
@@ -38,10 +38,10 @@ const useNextDay = () => {
   }, [randomEvents, onOpen]);
 
   const processNextDay = () => {
-    generateRandomEvents(user.cash);
-
     const updatedDaysLeft = user.daysLeft - 1;
     dispatch(setUserDaysLeft(updatedDaysLeft));
+
+    generateRandomEvents(user.cash, updatedDaysLeft);
 
     // update debt
     const updatedDebt = Math.floor(user.debt * (1 + DebtRate));

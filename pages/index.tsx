@@ -1,9 +1,13 @@
 import { Container, Flex, Stack } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/reducers/rootReducer";
+import { UserState } from "../redux/reducers/user";
 import EventModal from "../src/components/EventModal/EventModal";
 import Footer from "../src/components/Footer/Footer";
 import Header from "../src/components/Header/Header";
 import InfoModal from "../src/components/InfoModal/InfoModal";
 import ItemTable from "../src/components/ItemTable/ItemTable";
+import ScoreBoard from "../src/components/ScoreBoard/ScoreBoard";
 import Stations from "../src/components/Stations/Stations";
 import Status from "../src/components/Status/Status";
 import TransactionModal from "../src/components/TransactionModal/TransactionModal";
@@ -12,24 +16,30 @@ import { InfoProvider } from "../src/context/useInfo";
 import { TransactionProvider } from "../src/context/useTransaction";
 
 const HomePage = () => {
+  const user: UserState = useSelector((state: RootState) => state.user);
 
   return (
     <TransactionProvider>
       <EventProvider>
         <InfoProvider>
-          <Container maxW='container.lg' p={0}>
-            <Header />
-            <Stack h="35vh" padding={0} spacing="40px" direction="row">
-              <ItemTable description='黑市' />
-              <ItemTable isUser={true} description='您的出租屋' />
-            </Stack>
-            <Flex h="40vh" py={0} mb="20px">
-              <Status />
-              <Stations />
-            </Flex>
+          { user.daysLeft > 0 ? (
+              <Container maxW='container.lg' p={0}>
+                <Header />
+                <Stack h="35vh" padding={0} spacing="40px" direction="row">
+                  <ItemTable description='黑市' />
+                  <ItemTable isUser={true} description='您的出租屋' />
+                </Stack>
+                <Flex h="40vh" py={0} mb="20px">
+                  <Status />
+                  <Stations />
+                </Flex>
 
-            <Footer />
-          </Container>
+                <Footer />
+              </Container>
+            ) : (
+              <ScoreBoard />
+            )
+          }
           <TransactionModal />
           <EventModal />
           <InfoModal />

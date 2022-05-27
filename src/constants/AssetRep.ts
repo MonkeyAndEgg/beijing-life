@@ -1,6 +1,6 @@
 export enum AssetsReputation {
-  UltraPoor = '债台高筑',
-  Poor = '一贫如洗',
+  UltraPoor = '余生挖煤',
+  Poor = '噶腰子还钱',
   Zero = '屁都没有',
   LessThanTenW = '有点小钱',
   LessThanFiftyW = '小康',

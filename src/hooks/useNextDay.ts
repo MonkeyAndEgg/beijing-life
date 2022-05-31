@@ -6,12 +6,14 @@ import { DebtRate, DepositRate } from "../config/config";
 import { useEvent } from "../context/useEvent";
 import { Item } from "../models/item";
 import useRandomEvents from "./useRandomEvents";
+import useSound from "./useSound";
 
 const useNextDay = () => {
   const dispatch = useDispatch();
   const { user, market } = useSelector((state: RootState) => state);
   const { onOpen } = useEvent();
   const { events: randomEvents, generateRandomEvents } = useRandomEvents();
+  const { playSound } = useSound();
 
   useEffect(() => {
     if (user.daysLeft === 40 && market.items.length === 0) {
@@ -50,6 +52,8 @@ const useNextDay = () => {
     // update deposit
     const updatedDeposit = Math.floor(user.deposit * (1 + DepositRate));
     dispatch(setUserDeposit(updatedDeposit));
+
+    playSound('/sound/nextStop.wav');
   };
 
   return processNextDay;

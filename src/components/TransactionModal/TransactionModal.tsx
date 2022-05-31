@@ -11,6 +11,7 @@ import { RootState } from "../../../redux/reducers/rootReducer";
 import { businessEvents } from "../../constants/businessEvents";
 import { useEvent } from "../../context/useEvent";
 import { useTransaction } from "../../context/useTransaction";
+import useSound from "../../hooks/useSound";
 import { Item } from "../../models/item";
 
 const TransactionModal = () => {
@@ -20,6 +21,7 @@ const TransactionModal = () => {
   const { user, market }= useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const { onOpen } = useEvent();
+  const { playSound } = useSound();
 
   useEffect(() => {
     if (isOpen) {
@@ -88,6 +90,7 @@ const TransactionModal = () => {
       dispatch(setUserCurrCapacity(currentTotalStockNum));
       dispatch(setUserItems(updateList));
       dispatch(setUserCash(remainingCash));
+      playSound('/sound/buy.wav');
     }
 
     closeDialog();

@@ -15,10 +15,10 @@ const Status = () => {
   const user: UserState = useSelector((state: RootState) => state.user);
 
   return (
-    <VStack w='25vw' h='40vh' marginRight={5}>
+    <VStack w={{ base: '100%', md: '25vw' }} h={{ base: undefined, md: '40vh' }} marginRight={5}>
       <Card>
-        <List h="40vh" spacing={4} p={5} overflowY='auto'>
-          <Center fontWeight='bold'>当前状态</Center>
+        <List h={{ base: undefined, md: '40vh' }} spacing={4} p={5} overflowY='auto'>
+          <Center fontSize='0.875em'>当前状态</Center>
           <ListItem>
             <ListIcon as={RiMoneyCnyCircleLine} />
             现金余额

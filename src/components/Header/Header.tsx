@@ -42,7 +42,7 @@ export default function Header() {
   return (
     <Stack h="15vh" direction='row' justifyContent='space-between'>
       <Image src='/images/dagongren.jpg' alt="早安,打工人" />
-      <VStack justifyContent='center'>
+      <VStack justifyContent='center' display={{ base: 'none', md: undefined }}>
         <Text>俺在北京的日子还剩{user.daysLeft}天</Text>
         <Text>当前称号：{ ReputationMap.get(user.reputation) }</Text>
       </VStack >

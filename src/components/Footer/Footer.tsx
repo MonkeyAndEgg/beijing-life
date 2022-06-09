@@ -10,7 +10,7 @@ const Footer = () => {
 
   return (
     <Card>
-      <Stack direction="row" h="7vh" p="15px" justifyContent="space-between">
+      <Stack direction={{ base: "column", md: "row" }} h={{ base: undefined, md: "7vh" }} p="15px" justifyContent="space-between">
         <BankModal />
         <HospitalModal />
         <PostModal />

@@ -23,16 +23,16 @@ const HomePage = () => {
       <EventProvider>
         <InfoProvider>
           { user.daysLeft > 0 ? (
-              <Container maxW='container.lg' p={0}>
+              <Container maxW='container.lg' px={5}>
                 <Header />
-                <Stack h="35vh" padding={0} spacing="40px" direction="row">
+                <Stack h={{ base: undefined, md: "35vh"}} padding={0} spacing={{ base: "5px", md: "40px" }} direction={{ base: "column", md: "row" }}>
                   <ItemTable description='黑市' />
                   <ItemTable isUser={true} description='您的出租屋' />
                 </Stack>
-                <Flex h="40vh" py={0} mb="20px">
+                <Stack h={{ base: undefined, md: "40vh" }} py={0} mb="20px" direction={{ base: "column", md: "row" }}>
                   <Status />
                   <Stations />
-                </Flex>
+                </Stack>
 
                 <Footer />
               </Container>

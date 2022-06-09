@@ -20,6 +20,7 @@ import { useCallback, useState } from "react";
 import { EventModalData } from "../models/eventModalData";
 import { moneyEvents } from "../constants/moneyEvent";
 import { Item } from "../models/item";
+import useSound from "./useSound";
 
 const STOCK = [
   { id:'1', icon: GiCigarette, name: CIGARETTE, price: 200 },
@@ -36,6 +37,7 @@ const useRandomEvents = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state);
   const [ events, setEvents ] = useState([] as EventModalData[]);
+  const { playSound } = useSound();
   
   const generateRandomEvents = useCallback((cash?: number, daysLeft?: number) => {
     const eventList: EventModalData[] = [];
@@ -111,14 +113,16 @@ const useRandomEvents = () => {
         randomLifeEvent = { 
           event: `由于不注意身体，我被人发现昏迷在复兴门附近的女厕所里。好心的市民把我抬到医院，医生让我治疗2天。村长让人为我垫付了住院费用${healingCost}元`,
           img: '/images/help.jpg',
-          lifePoints: randomHealingPoints
+          lifePoints: randomHealingPoints,
+          sound: '/sound/motoaway.wav'
         };
         dispatch(setUserDebt(user.debt + healingCost));
         dispatch(setUserDaysLeft(user.daysLeft - 2));
       }
       eventList.push({ msg: randomLifeEvent.event, img: randomLifeEvent.img })
       const updatedHealth = user.health + randomLifeEvent.lifePoints;
-      dispatch(setUserHealth(updatedHealth)); 
+      dispatch(setUserHealth(updatedHealth));
+      playSound(randomLifeEvent.sound);
     }
     dispatch(setLifeEvent(randomLifeEvent));
 

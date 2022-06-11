@@ -24,13 +24,13 @@ import useSound from "./useSound";
 
 const STOCK = [
   { id:'1', icon: GiCigarette, name: CIGARETTE, price: 200 },
-  { id:'2', icon: BiBookHeart, name: PORN, price: 1500 },
+  { id:'2', icon: BiBookHeart, name: PORN, price: 7500 },
   { id:'3', icon: ImVideoCamera, name: CD, price: 50 },
-  { id:'4', icon: GiBeerBottle, name: ALCOHOL, price: 400, reputation: -10 },
-  { id:'5', icon: RiMarkupLine, name: COSMETIC, price: 800 },
-  { id:'6', icon: AiOutlineCar, name: CAR, price: 50000 },
-  { id:'7', icon: MdPhoneIphone, name: PHONES, price: 1200 },
-  { id:'8', icon: MdOutlineSmartToy, name: TOY, price: 500 },
+  { id:'4', icon: GiBeerBottle, name: ALCOHOL, price: 1500, reputation: -10 },
+  { id:'5', icon: RiMarkupLine, name: COSMETIC, price: 500 },
+  { id:'6', icon: AiOutlineCar, name: CAR, price: 20000 },
+  { id:'7', icon: MdPhoneIphone, name: PHONES, price: 1000 },
+  { id:'8', icon: MdOutlineSmartToy, name: TOY, price: 400 },
 ];
 
 const useRandomEvents = () => {
@@ -92,9 +92,7 @@ const useRandomEvents = () => {
         dispatch(setUserItems(updatedItems));
       } else {
         const newItem = { ...randomItem };
-        const stockItemOnMap = StockMultiplierMap.get(newItem.name);
-        newItem.price = newBusinessEvent.isPriceUp ? 
-          Math.floor(newItem.price * stockItemOnMap.mad) : Math.floor(newItem.price * 0.1);
+        newItem.price = Math.floor(newItem.price * newBusinessEvent.multiplier);
         updatedStock[randomIndex] = { ...newItem };
       }
 

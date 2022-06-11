@@ -39,7 +39,7 @@ const ItemTable = (props) => {
             </Thead>
             <Tbody>
               {items && items.map((item: Item) => 
-                <Tr key={item.id} cursor='pointer'  color='yellow.700' onClick={() => itemHandler(item)}>
+                <Tr key={item.id} cursor='pointer' color='yellow.700' onClick={() => itemHandler(item)}>
                   <Td><Icon as={item.icon}></Icon></Td>
                   <Td>{item.name}</Td>
                   <Td>{item.price}</Td>

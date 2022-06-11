@@ -71,10 +71,10 @@ export default function ScoreBoard() {
                 后记
               </Heading>
               {
-                totalAssets >= 0 ? (
+                totalAssets >= 0 && user.health > 0 ? (
                   <VStack>
                     <Text>
-                      俺在北京的日子结束了，赚了些小钱改回去娶翠花了。
+                      俺在北京的日子结束了，赚了些小钱该回去娶翠花了。
                     </Text>
                   </VStack>
                 ) : (
@@ -82,6 +82,16 @@ export default function ScoreBoard() {
                     <Image w={40} src={'/images/africa.jpg'} alt="欢迎来到非洲" />
                     <Text>
                       俺因为一直没有还上村长的高利贷，被村长伙同几个老乡卖去了非洲。。。
+                    </Text>
+                  </VStack>
+                )
+              } 
+              {
+                user.health === 0 && (
+                  <VStack>
+                    <Image w={40} src={'/images/die.jpg'} alt="挂了" />
+                    <Text>
+                      生命值归零，俺挂在了北京街头。
                     </Text>
                   </VStack>
                 )

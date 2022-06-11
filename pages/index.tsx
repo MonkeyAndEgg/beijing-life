@@ -22,7 +22,7 @@ const HomePage = () => {
     <TransactionProvider>
       <EventProvider>
         <InfoProvider>
-          { user.daysLeft > 0 ? (
+          { user.daysLeft > 0 || user.health === 0 ? (
               <Container maxW='container.lg' px={5}>
                 <Header />
                 <Stack h={{ base: undefined, md: "35vh"}} padding={0} spacing={{ base: "5px", md: "40px" }} direction={{ base: "column", md: "row" }}>

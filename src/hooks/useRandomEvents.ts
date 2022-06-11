@@ -55,7 +55,7 @@ const useRandomEvents = () => {
     }
 
     // random business event
-    const randomIndex = randomInteger(0, 20);
+    const randomIndex = randomInteger(0, 10);
     const randomItem = updatedStock[randomIndex];
     let newBusinessEvent: BusinessEvent;
     if (user.daysLeft < 40 && randomItem) {

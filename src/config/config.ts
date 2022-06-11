@@ -7,7 +7,7 @@ export const StockMultiplierMap = new Map([
   [ PHONES, { min: 0.7, max: 1.5 } ],
   [ ALCOHOL, { min: 0.7, max: 1.5 } ],
   [ PORN, { min: 0.7, max: 1.5 } ],
-  [ CD, { min: 0.7, max: 1.5 } ],
+  [ CD, { min: 0.7, max: 2 } ],
   [ TOY, { min: 0.7, max: 1.5 } ],
 ]);
 

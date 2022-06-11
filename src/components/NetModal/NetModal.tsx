@@ -1,5 +1,5 @@
 import { Button, HStack, Modal, ModalBody, Image, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, ModalFooter, useDisclosure } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaInternetExplorer } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserCash, setUserMaxNetCafeNum } from "../../../redux/actions/user";
@@ -10,8 +10,23 @@ import { randomInteger } from "../../helper/util";
 export default function NetModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [luckyCash, setLuckyCash] = useState(0);
+  const [ content, setContent ] = useState({ img: '', body: ''});
   const user: UserState = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user.maxNetCafeNum > 0) {
+      setContent({
+        img: '/images/net.jpg',
+        body: `感谢电信改革，可以免费上网！还挣了美国网络广告费${luckyCash}元，嘿嘿！`
+      });
+    } else {
+      setContent({
+        img: '/images/debt.jpg',
+        body: '村长放出话来：你别总是在网吧鬼混，快去做正经买卖！'
+      });
+    }
+  }, [user.maxNetCafeNum, luckyCash]);
 
   const netHandler = () => {
     if (user.maxNetCafeNum > 0) {
@@ -41,11 +56,10 @@ export default function NetModal() {
 
           <ModalBody>
             <HStack justify='center' my={5}>
-              <Image w={40} src="/images/net.jpg" alt="网吧小图片" />
+              <Image w={40} src={content.img} alt="网吧小图片" />
             </HStack>
             {
-              user.maxNetCafeNum > 0 ? (`感谢电信改革，可以免费上网！还挣了美国网络广告费${luckyCash}元，嘿嘿！`) :
-              ('村长放出话来：你别总是在网吧鬼混，快去做正经买卖！')
+              content.body
             }
           </ModalBody>
           <ModalFooter justifyContent="center">

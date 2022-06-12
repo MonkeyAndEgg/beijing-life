@@ -35,6 +35,7 @@ const TransactionModal = () => {
         maxNum = user.items.find(item => item.name === selectedItem.name).quantity;
       }
       setMaxQuantity(maxNum);
+      setQuantity(maxNum);
     }
   }, [isOpen, isBuy, user, selectedItem])
 

@@ -16,7 +16,8 @@ const PostModal = () => {
 
   useEffect(() => {
     const maxAmount = user.cash < user.debt ? user.cash : user.debt;
-    setMaxDebtToPay(maxAmount); 
+    setMaxDebtToPay(maxAmount);
+    setAmount(maxAmount); 
   }, [user.debt, user.cash, setMaxDebtToPay]);
 
   const debtHanlder = () => {

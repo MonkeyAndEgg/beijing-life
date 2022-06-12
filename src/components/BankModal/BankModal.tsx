@@ -1,5 +1,5 @@
 import { Button, HStack, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Image, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsBank2 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserCash, setUserDeposit } from "../../../redux/actions/user";
@@ -13,6 +13,14 @@ const BankModal = () => {
   const user: UserState = useSelector((state: RootState) => state.user);
   const [ amount, setAmount ] = useState(0);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    let updatedAmount = user.deposit;
+    if (isDeposit) {
+      updatedAmount = user.cash;
+    }
+    setAmount(updatedAmount);
+  }, [isDeposit, user.cash, user.deposit]);
 
   const depositHandler = (isDeposit: boolean) => {
     setIsDeposit(isDeposit);

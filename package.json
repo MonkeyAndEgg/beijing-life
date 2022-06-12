@@ -23,13 +23,13 @@
     "react-dom": "18.0.0",
     "react-icons": "^4.3.1",
     "react-redux": "^7.2.8",
-    "redux": "^4.1.2",
-    "save-dev": "^0.0.1-security"
+    "redux": "^4.1.2"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
     "@types/react": "^17.0.43",
     "eslint": "8.12.0",
-    "eslint-config-next": "12.1.3"
+    "eslint-config-next": "12.1.3",
+    "typescript": "^4.7.3"
   }
 }

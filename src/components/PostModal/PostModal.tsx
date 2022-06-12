@@ -6,6 +6,7 @@ import { setUserCash, setUserDebt } from "../../../redux/actions/user";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";
 import { BASE_PATH } from "../../constants/app";
+import useSound from "../../hooks/useSound";
 
 const PostModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -13,6 +14,7 @@ const PostModal = () => {
   const [ maxDebtToPay, setMaxDebtToPay ] = useState(0);
   const [ amount, setAmount ] = useState(0);
   const dispatch = useDispatch();
+  const { playSound } = useSound();
 
   useEffect(() => {
     const maxAmount = user.cash < user.debt ? user.cash : user.debt;
@@ -26,6 +28,7 @@ const PostModal = () => {
     dispatch(setUserDebt(updatedDebt));
     dispatch(setUserCash(updatedCash));
     setAmount(0);
+    playSound(BASE_PATH + '/sound/money.wav');
     onClose();
   };
 

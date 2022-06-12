@@ -6,6 +6,7 @@ import { setUserCash, setUserDeposit } from "../../../redux/actions/user";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";
 import { BASE_PATH } from "../../constants/app";
+import useSound from "../../hooks/useSound";
 
 const BankModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -13,6 +14,7 @@ const BankModal = () => {
   const user: UserState = useSelector((state: RootState) => state.user);
   const [ amount, setAmount ] = useState(0);
   const dispatch = useDispatch();
+  const { playSound } = useSound();
 
   useEffect(() => {
     let updatedAmount = user.deposit;
@@ -37,7 +39,8 @@ const BankModal = () => {
       updatedDeposit = Math.floor(user.deposit - amount);
     }
     dispatch(setUserDeposit(updatedDeposit));
-    dispatch(setUserCash(updatedCash))
+    dispatch(setUserCash(updatedCash));
+    playSound(BASE_PATH + '/sound/money.wav');
     onCloseServiceModal();
   };
 

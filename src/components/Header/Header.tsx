@@ -27,14 +27,14 @@ export default function Header() {
           您将体验在北京卖盗版VCD和走私汽车的刺激，以及我们这个时代才有的搞笑事件。
         `,
         footer: '开始游戏',
-        img: `${BASE_PATH}/images/work.jpg`
+        img: '/images/work.jpg'
       };
     } else if (user.daysLeft === 1) {
       infoData = {
         header: '最后一天',
         content: '俺明天回老家，今天货物需要全部卖掉。',
         footer: '知道了',
-        img: `${BASE_PATH}/images/clean.jpg`
+        img: '/images/clean.jpg'
       };
     }
     onOpen(infoData);

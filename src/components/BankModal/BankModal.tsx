@@ -11,7 +11,7 @@ const BankModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [ isDeposit, setIsDeposit ] = useState(null);
   const user: UserState = useSelector((state: RootState) => state.user);
-  const [ amount, setAmount ] = useState(user.cash);
+  const [ amount, setAmount ] = useState(0);
   const dispatch = useDispatch();
 
   const depositHandler = (isDeposit: boolean) => {
@@ -35,7 +35,7 @@ const BankModal = () => {
 
   const onCloseServiceModal = () => {
     setIsDeposit(null);
-    setAmount(user.cash);
+    setAmount(0);
     onClose();
   };
   

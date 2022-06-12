@@ -40,8 +40,8 @@ export default function ScoreBoard() {
   }, [totalAssets, setAssetRep])
 
   const restartHandler = () => {
-    window.location.href = '/';
-  };;
+    window.location.href = '/' + BASE_PATH;
+  };
 
   return (
     <Flex p={10} justifyContent="center" alignItems="center" h="100vh">

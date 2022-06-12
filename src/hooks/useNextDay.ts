@@ -34,6 +34,14 @@ const useNextDay = () => {
   }, [generateRandomEvents, user.daysLeft, user.cash, user.items, market.items, dispatch])
 
   useEffect(() => {
+    if (user.debt > 0) {
+      // update debt
+      const updatedDebt = Math.floor(user.debt * (1 + DebtRate));
+      dispatch(setUserDebt(updatedDebt));
+    }
+  }, [user.daysLeft]);
+
+  useEffect(() => {
     if (randomEvents.length > 0) {
       onOpen(randomEvents);
     }
@@ -44,10 +52,6 @@ const useNextDay = () => {
     dispatch(setUserDaysLeft(updatedDaysLeft));
 
     generateRandomEvents(user.cash, updatedDaysLeft);
-
-    // update debt
-    const updatedDebt = Math.floor(user.debt * (1 + DebtRate));
-    dispatch(setUserDebt(updatedDebt));
 
     // update deposit
     const updatedDeposit = Math.floor(user.deposit * (1 + DepositRate));

@@ -35,7 +35,7 @@ const useNextDay = () => {
   }, [generateRandomEvents, user.daysLeft, user.cash, user.items, market.items, dispatch])
 
   useEffect(() => {
-    if (user.debt > 0) {
+    if (user.debt > 0 &&  user.daysLeft < 40) {
       // update debt
       const updatedDebt = Math.floor(user.debt * (1 + DebtRate));
       dispatch(setUserDebt(updatedDebt));

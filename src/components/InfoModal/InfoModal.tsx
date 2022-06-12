@@ -1,4 +1,5 @@
 import { Button, HStack, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Image } from "@chakra-ui/react";
+import { BASE_PATH } from "../../constants/app";
 import { useInfo } from "../../context/useInfo";
 
 export default function InfoModal() {
@@ -13,7 +14,7 @@ export default function InfoModal() {
 
       <ModalBody>
         <HStack justify='center' my={5}>
-          <Image w={40} src={infoData.img} alt="打工小图片"></Image>
+          <Image w={40} src={BASE_PATH + infoData.img} alt="打工小图片"></Image>
         </HStack>
         {infoData.content ? infoData.content : ''}
       </ModalBody>

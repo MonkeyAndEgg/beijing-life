@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserCash, setUserMaxNetCafeNum } from "../../../redux/actions/user";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";
+import { BASE_PATH } from "../../constants/app";
 import { randomInteger } from "../../helper/util";
 
 export default function NetModal() {
@@ -17,12 +18,12 @@ export default function NetModal() {
   useEffect(() => {
     if (user.maxNetCafeNum > 0) {
       setContent({
-        img: '/images/net.jpg',
+        img: `${BASE_PATH}/images/net.jpg`,
         body: `感谢电信改革，可以免费上网！还挣了美国网络广告费${luckyCash}元，嘿嘿！`
       });
     } else {
       setContent({
-        img: '/images/debt.jpg',
+        img: `${BASE_PATH}/images/debt.jpg`,
         body: '村长放出话来：你别总是在网吧鬼混，快去做正经买卖！'
       });
     }
@@ -56,7 +57,7 @@ export default function NetModal() {
 
           <ModalBody>
             <HStack justify='center' my={5}>
-              <Image w={40} src={content.img} alt="网吧小图片" />
+              <Image w={40} src={BASE_PATH + content.img} alt="网吧小图片" />
             </HStack>
             {
               content.body

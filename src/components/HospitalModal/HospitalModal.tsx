@@ -5,6 +5,7 @@ import { UserState } from "../../../redux/reducers/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { setUserHealth } from "../../../redux/actions/user";
+import { BASE_PATH } from "../../constants/app";
 
 const HospitalModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,7 +44,7 @@ const HospitalModal = () => {
               <>
                 <ModalBody>
                   <HStack justify='center' my={5}>
-                    <Image w={40} src="/images/doctor.jpg" alt="治疗小图片" />
+                    <Image w={40} src={`${BASE_PATH}/images/doctor.jpg`} alt="治疗小图片" />
                   </HStack>
                   {`大夫高兴地拍着手：“您的健康点数是${user.health}，需要治疗的点数是${100 - user.health}。坚决抵制腐败！每个健康点数俺只收你￥3500红包。”。`}
                   <NumberInput value={amount} min={0} max={maxQuantity} my={5} onChange={(value) => setAmount(+value)} allowMouseWheel>
@@ -69,7 +70,7 @@ const HospitalModal = () => {
               <>
                 <ModalBody>
                   <HStack justify='center' my={5}>
-                    <Image w={40} src="/images/nurse.gif" alt="小护士图片" />
+                    <Image w={40} src={`${BASE_PATH}/images/nurse.gif`} alt="小护士图片" />
                   </HStack>
                   小护士笑眯眯地望着俺：“大哥！神经科这边挂号。”
                 </ModalBody>

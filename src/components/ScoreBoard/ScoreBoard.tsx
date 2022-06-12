@@ -1,8 +1,9 @@
-import { Button, Divider, Flex, Heading, List, ListItem, VStack, Text, Image, Center } from "@chakra-ui/react";
+import { Button, Divider, Flex, Heading, List, ListItem, VStack, Text, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";
+import { BASE_PATH } from "../../constants/app";
 import { AssetsReputation } from "../../constants/AssetRep";
 import { ReputationMap } from "../../constants/reputation";
 import Card from "../Card/Card";
@@ -79,7 +80,7 @@ export default function ScoreBoard() {
                   </VStack>
                 ) : (
                   <VStack>
-                    <Image w={40} src={'/images/africa.jpg'} alt="欢迎来到非洲" />
+                    <Image w={40} src={`${BASE_PATH}/images/africa.jpg`} alt="欢迎来到非洲" />
                     <Text>
                       俺因为一直没有还上村长的高利贷，被村长伙同几个老乡卖去了非洲。。。
                     </Text>
@@ -89,7 +90,7 @@ export default function ScoreBoard() {
               {
                 user.health === 0 && (
                   <VStack>
-                    <Image w={40} src={'/images/die.jpg'} alt="挂了" />
+                    <Image w={40} src={`${BASE_PATH}/images/die.jpg`} alt="挂了" />
                     <Text>
                       生命值归零，俺挂在了北京街头。
                     </Text>

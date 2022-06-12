@@ -21,6 +21,7 @@ import { EventModalData } from "../models/eventModalData";
 import { moneyEvents } from "../constants/moneyEvent";
 import { Item } from "../models/item";
 import useSound from "./useSound";
+import { BASE_PATH } from "../constants/app";
 
 const STOCK = [
   { id:'1', icon: GiCigarette, name: CIGARETTE, price: 200 },
@@ -110,9 +111,9 @@ const useRandomEvents = () => {
         const healingCost = Math.floor(randomHealingPoints * 3500);
         randomLifeEvent = { 
           event: `由于不注意身体，我被人发现昏迷在复兴门附近的女厕所里。好心的市民把我抬到医院，医生让我治疗2天。村长让人为我垫付了住院费用${healingCost}元`,
-          img: '/images/help.jpg',
+          img: BASE_PATH + '/images/help.jpg',
           lifePoints: randomHealingPoints,
-          sound: '/sound/motoaway.wav'
+          sound: BASE_PATH + '/sound/motoaway.wav'
         };
         dispatch(setUserDebt(user.debt + healingCost));
         dispatch(setUserDaysLeft(user.daysLeft - 2));

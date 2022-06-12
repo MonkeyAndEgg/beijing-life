@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserCash, setUserMaxCapacity } from "../../../redux/actions/user";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";
+import { BASE_PATH } from "../../constants/app";
 import { randomInteger } from "../../helper/util";
 
 export default function RentModal() {
@@ -37,7 +38,7 @@ export default function RentModal() {
 
           <ModalBody>
             <HStack justify='center' my={5}>
-              <Image w={40} src="/images/agent.jpg" alt="还钱小图片" />
+              <Image w={40} src={`${BASE_PATH}/images/agent.jpg`} alt="还钱小图片" />
             </HStack>
             {user.cash < 30000 ? '您没有三万现金就想租房？一边凉快去！' : (
               `欢迎来到北京“扁子居”租房中介公司！我们的理念，免费看房，成交补款，童叟无欺，无耻无畏！想把生意做大？您现在的房子只能放${user.maxCapacity}个物品，太小啦！您花费${rentPrice}元，可以租能放110个物品的房子`

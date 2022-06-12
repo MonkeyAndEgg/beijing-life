@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserCash, setUserCurrCapacity, setUserItems, setUserReputation } from "../../../redux/actions/user";
 import { RootState } from "../../../redux/reducers/rootReducer";
+import { BASE_PATH } from "../../constants/app";
 import { businessEvents } from "../../constants/businessEvents";
 import { useEvent } from "../../context/useEvent";
 import { useTransaction } from "../../context/useTransaction";
@@ -56,7 +57,7 @@ const TransactionModal = () => {
           } as Item);
         }
         remainingCash = user.cash - selectedItem.price * quantity;
-        playSound('/sound/buy.wav');
+        playSound(BASE_PATH + '/sound/buy.wav');
       } else {
         const targetMarketItem = market.items.find(item => item.name === selectedItem.name);
         if (targetMarketItem) {
@@ -81,9 +82,9 @@ const TransactionModal = () => {
             dispatch(setUserReputation(updatedReputation));
             onOpen([{ msg: `卖${targetEvent.type}危害社会，俺的名声降低了。`, img: targetEvent.img }]);
           }
-          playSound('/sound/money.wav');
+          playSound(BASE_PATH + '/sound/money.wav');
         } else {
-          onOpen([{ msg: `目前市场上没有人收${selectedItem.name}。。。`, img: '/images/reject.jpg' }]);
+          onOpen([{ msg: `目前市场上没有人收${selectedItem.name}。。。`, img: `${BASE_PATH}/images/reject.jpg` }]);
         }
       }
       
@@ -112,7 +113,7 @@ const TransactionModal = () => {
         
         <ModalBody>
           <HStack justify='center' my={5}>
-            <Image w={20} src='/images/stop.jpg' alt="我已经没钱了"></Image>
+            <Image w={20} src={`${BASE_PATH}/images/stop.jpg`} alt="我已经没钱了"></Image>
           </HStack>
           {isBuy ? '你想买多少呢?' : '你想卖多少呢?'}
           <NumberInput value={quantity} min={0} max={maxQuantity} my={5} onChange={(value) => setQuantity(+value)} allowMouseWheel>

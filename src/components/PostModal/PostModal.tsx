@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserCash, setUserDebt } from "../../../redux/actions/user";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";
+import { BASE_PATH } from "../../constants/app";
 
 const PostModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,7 +42,7 @@ const PostModal = () => {
 
           <ModalBody>
             <HStack justify='center' my={5}>
-              <Image w={40} src="/images/debt.jpg" alt="还钱小图片" />
+              <Image w={40} src={`${BASE_PATH}/images/debt.jpg`} alt="还钱小图片" />
             </HStack>
             {`村长在电话中说：“铁牛，你欠俺${user.debt}元，快还！” 您还多少？`}
             <NumberInput value={amount} min={0} max={maxDebtToPay} my={5} onChange={(value) => setAmount(+value)} allowMouseWheel>

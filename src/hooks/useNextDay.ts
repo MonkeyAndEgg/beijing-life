@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserCash, setUserDaysLeft, setUserDebt, setUserDeposit, setUserItems } from "../../redux/actions/user";
 import { RootState } from "../../redux/reducers/rootReducer";
 import { DebtRate, DepositRate } from "../config/config";
+import { BASE_PATH } from "../constants/app";
 import { useEvent } from "../context/useEvent";
 import { Item } from "../models/item";
 import useRandomEvents from "./useRandomEvents";
@@ -57,7 +58,7 @@ const useNextDay = () => {
     const updatedDeposit = Math.floor(user.deposit * (1 + DepositRate));
     dispatch(setUserDeposit(updatedDeposit));
 
-    playSound('/sound/nextStop.wav');
+    playSound(BASE_PATH + '/sound/nextStop.wav');
   };
 
   return processNextDay;

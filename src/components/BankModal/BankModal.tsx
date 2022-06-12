@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserCash, setUserDeposit } from "../../../redux/actions/user";
 import { RootState } from "../../../redux/reducers/rootReducer";
 import { UserState } from "../../../redux/reducers/user";
+import { BASE_PATH } from "../../constants/app";
 
 const BankModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,7 +56,7 @@ const BankModal = () => {
               <>
                 <ModalBody>
                   <HStack justify='center' my={5}>
-                    <Image w={40} src="/images/bank.jpg" alt="银行小图片" />
+                    <Image w={40} src={`${BASE_PATH}/images/bank.jpg`} alt="银行小图片" />
                   </HStack>
                 {`客户您好！您当前的现金为￥${user.cash}。当前存款余额为￥${user.deposit}。请问您是要办理什么业务？`}
                 </ModalBody>
@@ -76,7 +77,7 @@ const BankModal = () => {
               <>
                 <ModalBody>
                   <HStack justify='center' my={5}>
-                    <Image w={40} src="/images/deposit.jpg" alt="存钱小图片" />
+                    <Image w={40} src={`${BASE_PATH}/images/deposit.jpg`} alt="存钱小图片" />
                   </HStack>
                   {isDeposit ? '您想存多少呢?' : '您想取多少呢?'}
                   <NumberInput value={amount} min={0} max={isDeposit ? user.cash : user.deposit} my={5} onChange={(value) => setAmount(+value)} allowMouseWheel>

@@ -6,6 +6,7 @@ import { useInfo } from "../../context/useInfo";
 import { InfoModalData } from "../../models/infoModalData";
 import { Stack, Text, Image, VStack } from "@chakra-ui/react";
 import { ReputationMap } from "../../constants/reputation";
+import { BASE_PATH } from "../../constants/app";
 
 export default function Header() {
   const user: UserState = useSelector((state: RootState) => state.user);
@@ -26,14 +27,14 @@ export default function Header() {
           您将体验在北京卖盗版VCD和走私汽车的刺激，以及我们这个时代才有的搞笑事件。
         `,
         footer: '开始游戏',
-        img: '/images/work.jpg'
+        img: `${BASE_PATH}/images/work.jpg`
       };
     } else if (user.daysLeft === 1) {
       infoData = {
         header: '最后一天',
         content: '俺明天回老家，今天货物需要全部卖掉。',
         footer: '知道了',
-        img: '/images/clean.jpg'
+        img: `${BASE_PATH}/images/clean.jpg`
       };
     }
     onOpen(infoData);
@@ -41,12 +42,12 @@ export default function Header() {
 
   return (
     <Stack h="15vh" direction='row' justifyContent='space-between'>
-      <Image src='/images/dagongren.jpg' alt="早安,打工人" />
+      <Image src={`${BASE_PATH}/images/dagongren.jpg`} alt="早安,打工人" />
       <VStack justifyContent='center'>
         <Text>俺在北京的日子还剩{user.daysLeft}天</Text>
         <Text>当前称号：{ ReputationMap.get(user.reputation) }</Text>
       </VStack >
-      <Image src='/images/dagongren-2.jpg' alt="加油,打工人"  display={{ base: 'none', md: 'block' }} />
+      <Image src={`${BASE_PATH}/images/dagongren-2.jpg`} alt="加油,打工人"  display={{ base: 'none', md: 'block' }} />
     </Stack>
   );
 }

@@ -40,7 +40,11 @@ export default function ScoreBoard() {
   }, [totalAssets, setAssetRep])
 
   const restartHandler = () => {
-    window.location.href = window.location.href + '/' + BASE_PATH;
+    if (window.location.href.includes('localhost')) {
+      window.location.href = '/';
+    } else {
+      window.location.href = 'https://monkeyandegg.github.io/beijing-life/';
+    }
   };
 
   return (

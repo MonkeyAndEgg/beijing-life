@@ -18,12 +18,12 @@ export default function NetModal() {
   useEffect(() => {
     if (user.maxNetCafeNum > 0) {
       setContent({
-        img: `${BASE_PATH}/images/net.jpg`,
+        img: '/images/net.jpg',
         body: `感谢电信改革，可以免费上网！还挣了美国网络广告费${luckyCash}元，嘿嘿！`
       });
     } else {
       setContent({
-        img: `${BASE_PATH}/images/debt.jpg`,
+        img: '/images/debt.jpg',
         body: '村长放出话来：你别总是在网吧鬼混，快去做正经买卖！'
       });
     }

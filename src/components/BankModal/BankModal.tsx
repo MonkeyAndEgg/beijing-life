@@ -10,8 +10,8 @@ import { BASE_PATH } from "../../constants/app";
 const BankModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [ isDeposit, setIsDeposit ] = useState(null);
-  const [ amount, setAmount ] = useState(0);
   const user: UserState = useSelector((state: RootState) => state.user);
+  const [ amount, setAmount ] = useState(user.cash);
   const dispatch = useDispatch();
 
   const depositHandler = (isDeposit: boolean) => {
@@ -35,7 +35,7 @@ const BankModal = () => {
 
   const onCloseServiceModal = () => {
     setIsDeposit(null);
-    setAmount(0);
+    setAmount(user.cash);
     onClose();
   };
   

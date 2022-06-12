@@ -111,9 +111,9 @@ const useRandomEvents = () => {
         const healingCost = Math.floor(randomHealingPoints * 3500);
         randomLifeEvent = { 
           event: `由于不注意身体，我被人发现昏迷在复兴门附近的女厕所里。好心的市民把我抬到医院，医生让我治疗2天。村长让人为我垫付了住院费用${healingCost}元`,
-          img: BASE_PATH + '/images/help.jpg',
+          img: '/images/help.jpg',
           lifePoints: randomHealingPoints,
-          sound: BASE_PATH + '/sound/motoaway.wav'
+          sound: '/sound/motoaway.wav'
         };
         dispatch(setUserDebt(user.debt + healingCost));
         dispatch(setUserDaysLeft(user.daysLeft - 2));
@@ -121,7 +121,7 @@ const useRandomEvents = () => {
       eventList.push({ msg: randomLifeEvent.event, img: randomLifeEvent.img })
       const updatedHealth = user.health + randomLifeEvent.lifePoints;
       dispatch(setUserHealth(updatedHealth));
-      playSound(randomLifeEvent.sound);
+      playSound(BASE_PATH + randomLifeEvent.sound);
     }
     dispatch(setLifeEvent(randomLifeEvent));
 

@@ -40,7 +40,7 @@ export default function ScoreBoard() {
   }, [totalAssets, setAssetRep])
 
   const restartHandler = () => {
-    window.location.href = '/' + BASE_PATH;
+    window.location.href = window.location.href + '/' + BASE_PATH;
   };
 
   return (

@@ -6,10 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
-    "lint": "next lint",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d .next"
+    "lint": "next lint"
   },
   "dependencies": {
     "-": "^0.0.1",
@@ -18,7 +17,6 @@
     "@emotion/styled": "^11.8.1",
     "array-shuffle": "^3.0.0",
     "framer-motion": "^6.2.9",
-    "gh-pages": "^4.0.0",
     "next": "12.1.3",
     "next-redux-wrapper": "^7.0.5",
     "react": "18.0.0",
